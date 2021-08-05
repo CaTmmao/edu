@@ -10,14 +10,15 @@
         <version>2.4.8</version>
     </parent>
 
-    <groupId>com.catmmao</groupId>
-    <artifactId>cat-edu</artifactId>
+    <groupId>com.catmmao.edu</groupId>
+    <artifactId>edu</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cat-edu</name>
+    <name>edu</name>
     <description>在线教育项目</description>
 
     <modules>
-        <module>service</module>
+        <module>common</module>
+        <module>edu-teacher</module>
     </modules>
 
     <properties>

@@ -36,7 +36,7 @@ public class EduTeacher extends Model<EduTeacher> implements Serializable {
     //排序    
     private Object sort;
 
-    //逻辑删除 1（true）已删除， 0（false）未删除    
+    //逻辑删除 1（true）已删除， 0（false）未删除
     private Object isDeleted;
 
     //创建时间    

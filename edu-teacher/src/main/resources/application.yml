@@ -12,9 +12,14 @@ spring:
     #    时区
     time-zone: GMT+8
 
-# mybatis-plus配置控制台打印完整带参数SQL语句
 mybatis-plus:
+  global-config:
+    db-config:
+      # 全局逻辑删除的实体字段名
+      logic-delete-field: isDeleted
   configuration:
+    # 打印 mybatis-plus 执行的 sql 语句
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 
 
