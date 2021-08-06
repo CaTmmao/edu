@@ -27,11 +27,6 @@ public class EduTeacherController {
     @Resource
     private EduTeacherService eduTeacherService;
 
-    @GetMapping
-    public ResponseEntity<CommonResponse<List<EduTeacher>>> getAllTeachers() {
-        return ResponseEntity.of(Optional.of(CommonResponse.ok(eduTeacherService.list())));
-    }
-
     /**
      * 删除老师
      *
