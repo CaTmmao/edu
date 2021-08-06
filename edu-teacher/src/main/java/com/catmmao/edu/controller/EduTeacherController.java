@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-07-28 21:26:20
  */
 @RestController
-@RequestMapping("/api/v1/teacher")
+@RequestMapping("/teacher")
 public class EduTeacherController {
     @Resource
     private EduTeacherService eduTeacherService;
