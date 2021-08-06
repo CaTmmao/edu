@@ -32,8 +32,14 @@ public class EduTeacherController {
         return ResponseEntity.of(Optional.of(CommonResponse.ok(eduTeacherService.list())));
     }
 
+    /**
+     * 删除老师
+     *
+     * @param id 老师ID
+     * @return 是否删除成功
+     */
     @DeleteMapping("/{id}")
-    public boolean deleteTeacher(@PathVariable String id) {
-        return eduTeacherService.removeById(id);
+    public ResponseEntity<CommonResponse<Boolean>> deleteTeacher(@PathVariable String id) {
+        return ResponseEntity.of(Optional.of(CommonResponse.ok(eduTeacherService.removeById(id))));
     }
 }
