@@ -47,6 +47,19 @@ public class EduTeacherController {
     }
 
     /**
+     * 获取讲师
+     *
+     * @param id 讲师ID
+     * @return 讲师信息
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<CommonResponse<EduTeacher>> getTeacher(@PathVariable String id) {
+        EduTeacher teacher = eduTeacherService.getById(id);
+        CommonResponse<EduTeacher> responseBody = CommonResponse.ok(teacher);
+        return ResponseEntity.ok(responseBody);
+    }
+
+    /**
      * 删除讲师
      *
      * @param id 讲师ID
