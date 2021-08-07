@@ -34,6 +34,19 @@ public class EduTeacherController {
     private EduTeacherService eduTeacherService;
 
     /**
+     * 创建讲师
+     * @param eduTeacher 讲师信息
+     * @return 是否创建成功
+     */
+    @PostMapping
+    public ResponseEntity<CommonResponse<?>> createTeacher(@RequestBody EduTeacher eduTeacher) {
+        boolean isSuccess = eduTeacherService.save(eduTeacher);
+        CommonResponse<?> responseBody = isSuccess ? CommonResponse.ok(null) : CommonResponse.error("C0300", "创建失败");
+
+        return ResponseEntity.ok(responseBody);
+    }
+
+    /**
      * 删除老师
      *
      * @param id 老师ID
