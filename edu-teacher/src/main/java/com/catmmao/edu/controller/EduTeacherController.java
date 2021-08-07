@@ -11,6 +11,7 @@ import com.catmmao.edu.data.response.CommonResponse;
 import com.catmmao.edu.data.response.PageResponse;
 import com.catmmao.edu.entity.EduTeacher;
 import com.catmmao.edu.service.EduTeacherService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,7 @@ public class EduTeacherController {
 
     /**
      * 创建讲师
+     *
      * @param eduTeacher 讲师信息
      * @return 是否创建成功
      */
@@ -43,7 +45,7 @@ public class EduTeacherController {
         boolean isSuccess = eduTeacherService.save(eduTeacher);
         CommonResponse<?> responseBody = isSuccess ? CommonResponse.ok(null) : CommonResponse.error("C0300", "创建失败");
 
-        return ResponseEntity.ok(responseBody);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }
 
     /**
