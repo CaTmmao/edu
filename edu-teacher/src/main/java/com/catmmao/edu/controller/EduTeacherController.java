@@ -47,9 +47,9 @@ public class EduTeacherController {
     }
 
     /**
-     * 删除老师
+     * 删除讲师
      *
-     * @param id 老师ID
+     * @param id 讲师ID
      * @return 是否删除成功
      */
     @DeleteMapping("/{id}")
@@ -58,11 +58,11 @@ public class EduTeacherController {
     }
 
     /**
-     * 获取所有老师
+     * 获取所有讲师
      *
      * @param pageNum  当前第几页
      * @param pageSize 每页显示的数量
-     * @return 老师列表
+     * @return 讲师列表
      */
     @GetMapping("/teachers")
     public ResponseEntity<PageResponse<List<EduTeacher>>> pageTeacher(@RequestParam Integer pageNum,
@@ -81,12 +81,12 @@ public class EduTeacherController {
     }
 
     /**
-     * 获取所有老师(可筛选条件的分页查询)
+     * 获取所有讲师(可筛选条件的分页查询)
      *
      * @param pageNum                当前第几页
      * @param pageSize               每页显示的数量
      * @param pageTeacherRequestBody 筛选条件
-     * @return 老师列表
+     * @return 讲师列表
      */
     @PostMapping("teachers/condition")
     public ResponseEntity<PageResponse<List<EduTeacher>>> pageTeacherCondition(@RequestParam Integer pageNum,
@@ -127,9 +127,13 @@ public class EduTeacherController {
 
     // 可筛选条件的分页查询接口的请求体对象
     static class PageTeacherConditionRequestBody {
+        // 讲师被创建的开始时间
         private String begin;
+        // 讲师被创建的结束时间
         private String end;
+        // 讲师名字
         private String name;
+        // 讲师头衔
         private Integer level;
 
         public String getBegin() {
