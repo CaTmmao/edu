@@ -11,6 +11,7 @@ import com.catmmao.edu.data.response.CommonResponse;
 import com.catmmao.edu.data.response.PageResponse;
 import com.catmmao.edu.entity.EduTeacher;
 import com.catmmao.edu.service.EduTeacherService;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -73,29 +74,6 @@ public class EduTeacherController {
     }
 
     /**
-     * 获取所有讲师
-     *
-     * @param pageNum  当前第几页
-     * @param pageSize 每页显示的数量
-     * @return 讲师列表
-     */
-    @GetMapping("/teachers")
-    public ResponseEntity<PageResponse<List<EduTeacher>>> pageTeacher(@RequestParam Integer pageNum,
-                                                                      @RequestParam Integer pageSize) {
-        Page<EduTeacher> pageTeacher = new Page<>(pageNum, pageSize);
-        eduTeacherService.page(pageTeacher);
-        pageSize = (int) pageTeacher.getSize();
-        pageNum = (int) pageTeacher.getCurrent();
-        Integer total = (int) pageTeacher.getTotal();
-        Integer totalPage = total % pageSize == 0 ? total / pageSize : total / pageSize + 1;
-
-        PageResponse<List<EduTeacher>> responseBody =
-            PageResponse.pageOk(pageSize, pageNum, totalPage, pageTeacher.getRecords());
-
-        return ResponseEntity.ok(responseBody);
-    }
-
-    /**
      * 获取所有讲师(可筛选条件的分页查询)
      *
      * @param pageNum                当前第几页
@@ -106,29 +84,35 @@ public class EduTeacherController {
     @PostMapping("teachers/condition")
     public ResponseEntity<PageResponse<List<EduTeacher>>> pageTeacherCondition(@RequestParam Integer pageNum,
                                                                                @RequestParam Integer pageSize,
-                                                                               @RequestBody
+                                                                               @RequestBody(required = false)
                                                                                    PageTeacherConditionRequestBody pageTeacherRequestBody) {
-        String name = pageTeacherRequestBody.getName();
-        String begin = pageTeacherRequestBody.getBegin();
-        String end = pageTeacherRequestBody.getEnd();
-        Integer level = pageTeacherRequestBody.getLevel();
-
-        QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
-        if (name != null) {
-            wrapper.like("name", name);
-        }
-        if (begin != null) {
-            wrapper.ge("create_time", begin);
-        }
-        if (end != null) {
-            wrapper.le("create_time", end);
-        }
-        if (level != null) {
-            wrapper.eq("level", level);
-        }
-
         Page<EduTeacher> pageTeacher = new Page<>(pageNum, pageSize);
-        eduTeacherService.page(pageTeacher, wrapper);
+
+        if (pageTeacherRequestBody != null) {
+            String name = pageTeacherRequestBody.getName();
+            String begin = pageTeacherRequestBody.getBegin();
+            String end = pageTeacherRequestBody.getEnd();
+            Integer level = pageTeacherRequestBody.getLevel();
+
+            QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
+            if (Strings.isEmpty(name)) {
+                wrapper.like("name", name);
+            }
+            if (Strings.isEmpty(begin)) {
+                wrapper.ge("create_time", begin);
+            }
+            if (Strings.isEmpty(end)) {
+                wrapper.le("create_time", end);
+            }
+            if (level == 1 || level == 2) {
+                wrapper.eq("level", level);
+            }
+
+            eduTeacherService.page(pageTeacher, wrapper);
+        } else {
+            eduTeacherService.page(pageTeacher);
+        }
+
         pageSize = (int) pageTeacher.getSize();
         pageNum = (int) pageTeacher.getCurrent();
         Integer total = (int) pageTeacher.getTotal();
