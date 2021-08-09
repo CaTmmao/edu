@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,6 +50,16 @@ public class EduTeacherController {
         CommonResponse<?> responseBody = isSuccess ? CommonResponse.ok(null) : CommonResponse.error("C0300", "创建失败");
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<CommonResponse<?>> updateTeacher(@PathVariable String id,
+                                                           @RequestBody EduTeacher eduTeacher) {
+        eduTeacher.setId(id);
+        boolean isSuccess = eduTeacherService.updateById(eduTeacher);
+
+        CommonResponse<?> responseBody = isSuccess ? CommonResponse.ok(null) : CommonResponse.error("C0300", "更新失败");
+        return ResponseEntity.ok(responseBody);
     }
 
     /**
