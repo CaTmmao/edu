@@ -19,16 +19,24 @@
     <modules>
         <module>common</module>
         <module>edu-teacher</module>
+        <module>edu-oss</module>
     </modules>
 
     <properties>
         <java.version>1.8</java.version>
         <mybatis-plus.version>3.4.3</mybatis-plus.version>
         <swagger.version>3.0.0</swagger.version>
+        <aliyun.oss.version>3.10.2</aliyun.oss.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun.oss.version}</version>
+            </dependency>
+
             <!--mybatis-plus-->
             <!--引入 MyBatis-Plus 之后请不要再次引入 MyBatis 以及 MyBatis-Spring，以避免因版本差异导致的问题。-->
             <dependency>
