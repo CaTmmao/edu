@@ -108,16 +108,16 @@ public class EduTeacherController {
             Integer level = pageTeacherRequestBody.getLevel();
 
             QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
-            if (Strings.isEmpty(name)) {
+            if (!Strings.isEmpty(name)) {
                 wrapper.like("name", name);
             }
-            if (Strings.isEmpty(begin)) {
+            if (!Strings.isEmpty(begin)) {
                 wrapper.ge("create_time", begin);
             }
-            if (Strings.isEmpty(end)) {
+            if (!Strings.isEmpty(end)) {
                 wrapper.le("create_time", end);
             }
-            if (level == 1 || level == 2) {
+            if (level != null) {
                 wrapper.eq("level", level);
             }
 
