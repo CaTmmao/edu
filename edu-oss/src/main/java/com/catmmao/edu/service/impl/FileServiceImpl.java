@@ -58,6 +58,8 @@ public class FileServiceImpl implements FileService {
      * @return 处理后的文件名
      */
     private String generateFileName(String originalFilename) {
+        String suffix = originalFilename.substring(originalFilename.indexOf("."), originalFilename.length());
+
         // uuid 生成随机数避免文件名重复将其他文件覆盖
         String uuid = UUID.randomUUID().toString();
 
@@ -66,6 +68,6 @@ public class FileServiceImpl implements FileService {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new Date());
 
-        return date + "/" + originalFilename + uuid;
+        return date + "/" + uuid + suffix;
     }
 }
