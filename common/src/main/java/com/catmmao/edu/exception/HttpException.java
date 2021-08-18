@@ -33,6 +33,11 @@ public class HttpException extends RuntimeException {
         return new HttpException(message, HttpStatus.FORBIDDEN, errorCode);
     }
 
+    // 数据库服务出错
+    public static HttpException databaseError(String errorCode, String message) {
+        return new HttpException(message, HttpStatus.INTERNAL_SERVER_ERROR, errorCode);
+    }
+
     public static HttpException gone(String message, String errorCode) {
         return new HttpException(message, HttpStatus.GONE, errorCode);
     }
