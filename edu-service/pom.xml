@@ -10,10 +10,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>teacher</artifactId>
+    <artifactId>service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>teacher</name>
-    <description>讲师管理模块</description>
+    <name>service</name>
+    <description>各服务模块</description>
 
     <dependencies>
         <dependency>
