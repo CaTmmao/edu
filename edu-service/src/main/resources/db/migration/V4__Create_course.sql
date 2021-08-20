@@ -8,7 +8,7 @@ create table `edu_course`
 (
     `id`          char(19)    not null comment '课程id',
     `teacher_id`  char(19)    not null comment '课程讲师id',
-    `subject_id`  char(19)    not null comment '课程分类id',
+    `category_id`  char(19)    not null comment '课程分类id',
     `title`       varchar(50) not null comment '课程标题',
     `price`       decimal(10, 2) unsigned not null default '0.00' comment '课程销售价格，设置为0则可免费观看',
     `lesson_num`  int(10) unsigned not null default '0' comment '总课时',
@@ -22,7 +22,7 @@ create table `edu_course`
     `update_time` datetime on update now() comment '更新时间',
     primary key (`id`),
     key           `idx_title` (`title`),
-    key           `idx_subject_id` (`subject_id`),
+    key           `idx_category_id` (`category_id`),
     key           `idx_teacher_id` (`teacher_id`)
 ) engine=innodb default charset=utf8mb4 row_format=compact comment='课程基本信息';
 
