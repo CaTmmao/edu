@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-07-28 21:26:20
  */
 @RestController
-@RequestMapping("/teacher")
+@RequestMapping("/service/teacher")
 @CrossOrigin
 public class EduTeacherController {
     @Resource

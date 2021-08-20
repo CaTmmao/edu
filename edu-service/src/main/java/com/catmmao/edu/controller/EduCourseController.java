@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/course")
+@RequestMapping("/service/course")
 public class EduCourseController {
     @Resource
     private EduCourseService eduCourseService;
