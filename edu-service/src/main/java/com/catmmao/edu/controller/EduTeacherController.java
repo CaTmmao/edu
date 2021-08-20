@@ -39,6 +39,17 @@ public class EduTeacherController {
     private EduTeacherService eduTeacherService;
 
     /**
+     * 获取讲师列表
+     *
+     * @return 所有讲师
+     */
+    @GetMapping("/all")
+    public ResponseEntity<CommonResponse<List<EduTeacher>>> getTeacherList() {
+        List<EduTeacher> data = eduTeacherService.list();
+        return ResponseEntity.ok(CommonResponse.ok(data));
+    }
+
+    /**
      * 创建讲师
      *
      * @param eduTeacher 讲师信息
