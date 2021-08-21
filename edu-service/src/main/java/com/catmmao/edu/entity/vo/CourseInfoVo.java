@@ -1,8 +1,8 @@
-package com.catmmao.edu.entity.data;
+package com.catmmao.edu.entity.vo;
 
 import java.math.BigDecimal;
 
-public class CourseCompleteInfo {
+public class CourseInfoVo {
     // 课程ID
     private String id;
 
@@ -10,7 +10,7 @@ public class CourseCompleteInfo {
     private String teacherId;
 
     // 课程分类ID
-    private String subjectId;
+    private String categoryId;
 
     // 课程标题
     private String title;
@@ -43,12 +43,12 @@ public class CourseCompleteInfo {
         this.teacherId = teacherId;
     }
 
-    public String getSubjectId() {
-        return subjectId;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setSubjectId(String subjectId) {
-        this.subjectId = subjectId;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getTitle() {

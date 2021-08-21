@@ -2,7 +2,7 @@ package com.catmmao.edu.controller;
 
 import javax.annotation.Resource;
 
-import com.catmmao.edu.entity.data.CourseCompleteInfo;
+import com.catmmao.edu.entity.vo.CourseInfoVo;
 import com.catmmao.edu.data.response.CommonResponse;
 import com.catmmao.edu.service.EduCourseService;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ public class EduCourseController {
     private EduCourseService eduCourseService;
 
     @PostMapping
-    public ResponseEntity<CommonResponse<?>> addCourse(@RequestBody CourseCompleteInfo data) {
+    public ResponseEntity<CommonResponse<?>> addCourse(@RequestBody CourseInfoVo data) {
         boolean result = eduCourseService.addCourse(data);
         return ResponseEntity.status(HttpStatus.CREATED).body(CommonResponse.ok(result));
     }

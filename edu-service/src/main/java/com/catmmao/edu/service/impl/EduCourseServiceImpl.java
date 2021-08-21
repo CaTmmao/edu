@@ -7,7 +7,7 @@ import com.catmmao.edu.dao.mapper.EduCourseDescriptionMapper;
 import com.catmmao.edu.dao.mapper.EduCourseMapper;
 import com.catmmao.edu.entity.EduCourse;
 import com.catmmao.edu.entity.EduCourseDescription;
-import com.catmmao.edu.entity.data.CourseCompleteInfo;
+import com.catmmao.edu.entity.vo.CourseInfoVo;
 import com.catmmao.edu.exception.HttpException;
 import com.catmmao.edu.service.EduCourseService;
 import org.springframework.beans.BeanUtils;
@@ -33,7 +33,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
      */
     @Transactional
     @Override
-    public boolean addCourse(CourseCompleteInfo info) {
+    public boolean addCourse(CourseInfoVo info) {
         // 课程表中插入数据
         EduCourse eduCourse = new EduCourse();
         BeanUtils.copyProperties(info, eduCourse);
