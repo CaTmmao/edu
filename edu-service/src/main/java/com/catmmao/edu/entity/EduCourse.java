@@ -1,17 +1,19 @@
 package com.catmmao.edu.entity;
 
 import java.util.Date;
+
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.io.Serializable;
 
 /**
- * 课程(EduCourse)实体类
+ * 课程基本信息(EduCourse)实体类
  *
  * @author catmmao
- * @since 2021-08-18 19:17:46
+ * @since 2021-08-20 21:06:19
  */
 public class EduCourse extends Model<EduCourse> implements Serializable {
-    private static final long serialVersionUID = -47999832465436828L;
+    private static final long serialVersionUID = 724432126276896192L;
 
     // 课程id    
     private String id;
@@ -19,11 +21,8 @@ public class EduCourse extends Model<EduCourse> implements Serializable {
     // 课程讲师id    
     private String teacherId;
 
-    // 课程专业id    
-    private String subjectId;
-
-    // 课程专业父级id    
-    private String subjectParentId;
+    // 课程分类id
+    private String categoryId;
 
     // 课程标题    
     private String title;
@@ -74,20 +73,12 @@ public class EduCourse extends Model<EduCourse> implements Serializable {
         this.teacherId = teacherId;
     }
 
-    public String getSubjectId() {
-        return subjectId;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setSubjectId(String subjectId) {
-        this.subjectId = subjectId;
-    }
-
-    public String getSubjectParentId() {
-        return subjectParentId;
-    }
-
-    public void setSubjectParentId(String subjectParentId) {
-        this.subjectParentId = subjectParentId;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getTitle() {
