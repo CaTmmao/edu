@@ -13,7 +13,7 @@ public class HttpException extends RuntimeException {
     // 错误代码
     private String errorCode;
 
-    private HttpException(String message, HttpStatus httpStatus, String errorCode) {
+    public HttpException(String message, HttpStatus httpStatus, String errorCode) {
         this.message = message;
         this.httpStatus = httpStatus;
         this.errorCode = errorCode;
