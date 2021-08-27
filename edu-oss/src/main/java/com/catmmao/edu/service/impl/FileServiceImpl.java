@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
-import com.catmmao.edu.entity.Oss;
+import com.catmmao.edu.utils.OssConstant;
 import com.catmmao.edu.service.FileService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,10 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileServiceImpl implements FileService {
     @Override
     public String uploadFile(MultipartFile file) {
-        String endpoint = Oss.ENDPOINT;
-        String accessKeyId = Oss.ACCESSKEYID;
-        String accessKeySecret = Oss.ACCESSKEYSECRET;
-        String bucketName = Oss.BUCKETNAME;
+        String endpoint = OssConstant.ENDPOINT;
+        String accessKeyId = OssConstant.ACCESSKEYID;
+        String accessKeySecret = OssConstant.ACCESSKEYSECRET;
+        String bucketName = OssConstant.BUCKETNAME;
 
         // 文件名
         String fileName = generateFileName(file.getOriginalFilename());
@@ -33,7 +33,7 @@ public class FileServiceImpl implements FileService {
             // 上传文件
             ossClient.putObject(
                 // Bucket名称（例如examplebucket）
-                Oss.BUCKETNAME,
+                OssConstant.BUCKETNAME,
                 // 文件完整路径（例如exampledir/exampleobject.txt）文件完整路径中不能包含Bucket名称。
                 fileName,
                 inputStream);
