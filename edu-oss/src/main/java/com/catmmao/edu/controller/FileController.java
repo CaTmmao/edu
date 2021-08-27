@@ -28,10 +28,8 @@ public class FileController {
      * @return oss中文件所在的路径
      */
     @PostMapping("/file")
-    public ResponseEntity<CommonResponse<Map<String, String>>> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<CommonResponse<String>> uploadFile(@RequestParam("file") MultipartFile file) {
         String filePath = fileService.uploadFile(file);
-        Map<String, String> map = new HashMap<>();
-        map.put("url", filePath);
-        return ResponseEntity.ok(CommonResponse.ok(map));
+        return ResponseEntity.ok(CommonResponse.ok(filePath));
     }
 }
