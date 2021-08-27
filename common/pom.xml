@@ -6,14 +6,14 @@
 
     <parent>
         <groupId>com.catmmao.edu</groupId>
-        <artifactId>edu</artifactId>
+        <artifactId>root</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <description>各个模块的公共依赖,bean,类</description>
-    <name>edu-common</name>
+    <name>common</name>
 
     <dependencies>
         <!-- mybatis-plus -->

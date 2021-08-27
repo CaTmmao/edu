@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.catmmao.edu</groupId>
-    <artifactId>edu</artifactId>
+    <artifactId>root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>edu</name>
-    <description>在线教育项目</description>
+    <name>root</name>
+    <description>在线教育项目父pom</description>
 
     <modules>
         <module>common</module>
