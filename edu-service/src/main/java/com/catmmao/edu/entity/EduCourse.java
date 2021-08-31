@@ -45,8 +45,8 @@ public class EduCourse extends Model<EduCourse> implements Serializable {
     // 乐观锁    
     private Long version;
 
-    // 课程状态 draft未发布  normal已发布    
-    private String status;
+    // 课程状态 1（true）已发布， 0（false）未发布
+    private Boolean status;
 
     // 逻辑删除 1（true）已删除， 0（false）未删除    
     private Boolean isDeleted;
@@ -137,11 +137,11 @@ public class EduCourse extends Model<EduCourse> implements Serializable {
         this.version = version;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

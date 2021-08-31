@@ -1,9 +1,9 @@
 package com.catmmao.edu.service;
 
-import com.catmmao.edu.entity.vo.CourseInfoVo;
-import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.catmmao.edu.entity.EduCourse;
+import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;
+import org.springframework.stereotype.Service;
 
 /**
  * 课程(EduCourse)表服务接口
@@ -13,6 +13,10 @@ import com.catmmao.edu.entity.EduCourse;
  */
 @Service
 public interface EduCourseService extends IService<EduCourse> {
-    boolean addCourse(CourseInfoVo info);
+    /**
+     * 添加课程
+     * @param info 课程信息
+     */
+    void addCourse(CourseCompleteInfoVo info);
 }
 

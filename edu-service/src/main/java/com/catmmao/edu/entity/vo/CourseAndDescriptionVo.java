@@ -2,7 +2,7 @@ package com.catmmao.edu.entity.vo;
 
 import java.math.BigDecimal;
 
-public class CourseInfoVo {
+public class CourseAndDescriptionVo {
     // 课程ID
     private String id;
 
