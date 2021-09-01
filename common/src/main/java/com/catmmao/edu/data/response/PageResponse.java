@@ -11,14 +11,18 @@ public class PageResponse<T> extends CommonResponse<T> {
     // 当前第几页，从 1 开始（默认是 1）
     private Integer pageNum;
 
+    // 共有多少条
+    private Integer total;
+
     // 共有多少页
     private Integer totalPage;
 
-    public static <T> PageResponse<T> pageOk(Integer pageSize, Integer pageNum,
-                                         Integer totalPage, T data) {
+    public static <T> PageResponse<T> pageOk(Integer pageSize, Integer pageNum, Integer total,
+                                             Integer totalPage, T data) {
         PageResponse<T> result = new PageResponse<>();
         result.setPageSize(pageSize);
         result.setPageNum(pageNum);
+        result.setTotal(total);
         result.setTotalPage(totalPage);
         result.setData(data);
         return result;
@@ -54,5 +58,13 @@ public class PageResponse<T> extends CommonResponse<T> {
 
     public void setTotalPage(Integer totalPage) {
         this.totalPage = totalPage;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 }
