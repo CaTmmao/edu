@@ -18,6 +18,7 @@ import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;
 import com.catmmao.edu.entity.vo.PageCourseRequestBody;
 import com.catmmao.edu.exception.HttpException;
+import com.catmmao.edu.service.EduCourseDescriptionService;
 import com.catmmao.edu.service.EduCourseService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.BeanUtils;
@@ -41,36 +42,8 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Resource
     EduVideoMapper eduVideoMapper;
 
-    /**
-     * 添加课程基本信息
-     *
-     * @param courseAndDescriptionVo 课程基本信息
-     * @return 课程ID
-     */
-    @Transactional
-    public String addCourseBaseInfo(CourseAndDescriptionVo courseAndDescriptionVo) {
-        // 课程表中插入数据
-        EduCourse eduCourse = new EduCourse();
-        BeanUtils.copyProperties(courseAndDescriptionVo, eduCourse);
-        int affectedRow = baseMapper.insert(eduCourse);
-
-        if (affectedRow == 0) {
-            throw HttpException.databaseError("C0300", "课程表数据插入失败");
-        }
-
-        String courseId = eduCourse.getId();
-
-        // 课程简介表中插入数据
-        EduCourseDescription eduCourseDescription = new EduCourseDescription();
-        eduCourseDescription.setDescription(courseAndDescriptionVo.getDescription());
-        eduCourseDescription.setId(courseId);
-        affectedRow = eduCourseDescriptionMapper.insert(eduCourseDescription);
-        if (affectedRow == 0) {
-            throw HttpException.databaseError("C0300", "课程介绍表数据插入失败");
-        }
-
-        return courseId;
-    }
+    @Resource
+    EduCourseDescriptionService eduCourseDescriptionService;
 
     @Transactional
     @Override
@@ -141,5 +114,83 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
         return PageResponse.pageOk(pageSize, pageNum, total, totalPage, pageCourse.getRecords());
     }
+
+    @Transactional
+    @Override
+    public void updateCourseAndDescription(CourseAndDescriptionVo courseAndDescriptionVo) {
+        // 更新数据库 edu_course 表的数据
+        EduCourse newCourse = new EduCourse();
+        BeanUtils.copyProperties(courseAndDescriptionVo, newCourse);
+        updateCourse(newCourse);
+
+        // 更新数据库 edu_course_description 表的数据
+        EduCourseDescription courseDescription = new EduCourseDescription();
+        BeanUtils.copyProperties(courseAndDescriptionVo, courseDescription);
+        if (!eduCourseDescriptionService.saveOrUpdate(courseDescription)) {
+            throw HttpException.databaseError("C0300", "课程信息更新失败");
+        }
+    }
+
+    /**
+     * 更新 edu_course 表中的信息
+     *
+     * @param newCourse 新的数据
+     */
+    private void updateCourse(EduCourse newCourse) {
+        String id = newCourse.getId();
+        getCourse(id);
+
+        if (!this.updateById(newCourse)) {
+            throw HttpException.databaseError("C0300", "课程信息更新失败");
+        }
+    }
+
+    /**
+     * 根据课程ID获取 edu_course 表的信息
+     *
+     * @param courseId 课程ID
+     * @return 课程信息
+     */
+    private EduCourse getCourse(String courseId) {
+        EduCourse result = this.getById(courseId);
+        if (result == null) {
+            throw HttpException.resourceNotFound("C0300", "找不到id为 " + courseId + " 的课程");
+        }
+
+        return result;
+    }
+
+    /**
+     * 添加课程基本信息
+     *
+     * @param courseAndDescriptionVo 课程基本信息
+     * @return 课程ID
+     */
+    @Transactional
+    public String addCourseBaseInfo(CourseAndDescriptionVo courseAndDescriptionVo) {
+        // 课程表中插入数据
+        EduCourse eduCourse = new EduCourse();
+        BeanUtils.copyProperties(courseAndDescriptionVo, eduCourse);
+        int affectedRow = baseMapper.insert(eduCourse);
+
+        if (affectedRow == 0) {
+            throw HttpException.databaseError("C0300", "课程表数据插入失败");
+        }
+
+        String courseId = eduCourse.getId();
+
+        // 课程简介表中插入数据
+        EduCourseDescription eduCourseDescription = new EduCourseDescription();
+        eduCourseDescription.setDescription(courseAndDescriptionVo.getDescription());
+        eduCourseDescription.setId(courseId);
+        affectedRow = eduCourseDescriptionMapper.insert(eduCourseDescription);
+        if (affectedRow == 0) {
+            throw HttpException.databaseError("C0300", "课程介绍表数据插入失败");
+        }
+
+        return courseId;
+    }
+
+
 }
 

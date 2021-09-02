@@ -6,12 +6,15 @@ import javax.annotation.Resource;
 import com.catmmao.edu.data.response.CommonResponse;
 import com.catmmao.edu.data.response.PageResponse;
 import com.catmmao.edu.entity.EduCourse;
+import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;
 import com.catmmao.edu.entity.vo.PageCourseRequestBody;
 import com.catmmao.edu.service.EduCourseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +60,21 @@ public class EduCourseController {
                                                                                      PageCourseRequestBody condition) {
         PageResponse<List<EduCourse>> responseBody = eduCourseService.pageCourseCondition(pageNum, pageSize, condition);
         return ResponseEntity.ok(responseBody);
+    }
+
+    /**
+     * 更新课程基本信息
+     *
+     * @param id                     课程id
+     * @param courseAndDescriptionVo 课程基本信息
+     */
+    @PatchMapping("/{id}")
+    public ResponseEntity<CommonResponse<?>> updateCourseAndDescription(@PathVariable String id,
+                                                                        @RequestBody
+                                                                                CourseAndDescriptionVo courseAndDescriptionVo) {
+        courseAndDescriptionVo.setId(id);
+        eduCourseService.updateCourseAndDescription(courseAndDescriptionVo);
+        return ResponseEntity.ok(CommonResponse.ok(true));
     }
 }
 

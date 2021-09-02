@@ -5,6 +5,7 @@ import java.util.List;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.catmmao.edu.data.response.PageResponse;
 import com.catmmao.edu.entity.EduCourse;
+import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;
 import com.catmmao.edu.entity.vo.PageCourseRequestBody;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,12 @@ public interface EduCourseService extends IService<EduCourse> {
      */
     PageResponse<List<EduCourse>> pageCourseCondition(Integer pageNum, Integer pageSize,
                                                       PageCourseRequestBody condition);
+
+    /**
+     * 更新课程基本信息
+     *
+     * @param courseAndDescriptionVo 课程基本信息
+     */
+    void updateCourseAndDescription(CourseAndDescriptionVo courseAndDescriptionVo);
 }
 
