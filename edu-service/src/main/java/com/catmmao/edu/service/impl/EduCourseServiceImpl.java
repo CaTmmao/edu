@@ -49,7 +49,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Override
     public void addCourse(CourseCompleteInfoVo info) {
         CourseAndDescriptionVo courseAndDescriptionVo = info.getCourseBaseInfo();
-        String courseId = this.addCourseBaseInfo(courseAndDescriptionVo);
+        String courseId = this.addCourseAndDescription(courseAndDescriptionVo);
 
         info.getChapterList().forEach(chapterVo -> {
             EduChapter chapter = new EduChapter();
@@ -167,30 +167,33 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
      * @return 课程ID
      */
     @Transactional
-    public String addCourseBaseInfo(CourseAndDescriptionVo courseAndDescriptionVo) {
-        // 课程表中插入数据
+    public String addCourseAndDescription(CourseAndDescriptionVo courseAndDescriptionVo) {
+        // 插入数据到数据库 edu_course 表中
         EduCourse eduCourse = new EduCourse();
         BeanUtils.copyProperties(courseAndDescriptionVo, eduCourse);
-        int affectedRow = baseMapper.insert(eduCourse);
-
-        if (affectedRow == 0) {
-            throw HttpException.databaseError("C0300", "课程表数据插入失败");
-        }
+        addCourse(eduCourse);
 
         String courseId = eduCourse.getId();
 
-        // 课程简介表中插入数据
+        // 插入数据到数据库 edu_course_description 表中
         EduCourseDescription eduCourseDescription = new EduCourseDescription();
-        eduCourseDescription.setDescription(courseAndDescriptionVo.getDescription());
-        eduCourseDescription.setId(courseId);
-        affectedRow = eduCourseDescriptionMapper.insert(eduCourseDescription);
-        if (affectedRow == 0) {
-            throw HttpException.databaseError("C0300", "课程介绍表数据插入失败");
+        BeanUtils.copyProperties(courseAndDescriptionVo, eduCourseDescription);
+        if (!eduCourseDescriptionService.save(eduCourseDescription)) {
+            throw HttpException.databaseError("C0300", "课程简介保存失败");
         }
 
         return courseId;
     }
 
-
+    /**
+     * 添加课程信息
+     *
+     * @param course 课程信息
+     */
+    private void addCourse(EduCourse course) {
+        if (this.save(course)) {
+            throw HttpException.databaseError("C0300", "课程信息保存失败");
+        }
+    }
 }
 
