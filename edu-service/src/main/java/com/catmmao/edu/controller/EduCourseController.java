@@ -31,6 +31,11 @@ public class EduCourseController {
     @Resource
     private EduCourseService eduCourseService;
 
+    /**
+     * 添加课程完整信息（包括课程基本信息+章节信息）
+     * @param data 课程完整数据
+     * @return 是否成功
+     */
     @PostMapping
     public ResponseEntity<CommonResponse<Boolean>> addCourse(@RequestBody CourseCompleteInfoVo data) {
         eduCourseService.addCourse(data);
