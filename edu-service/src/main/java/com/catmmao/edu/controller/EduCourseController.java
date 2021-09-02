@@ -13,6 +13,7 @@ import com.catmmao.edu.service.EduCourseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +37,7 @@ public class EduCourseController {
 
     /**
      * 添加课程完整信息（包括课程基本信息+章节信息）
+     *
      * @param data 课程完整数据
      * @return 是否成功
      */
@@ -75,6 +77,18 @@ public class EduCourseController {
         courseAndDescriptionVo.setId(id);
         eduCourseService.updateCourseAndDescription(courseAndDescriptionVo);
         return ResponseEntity.ok(CommonResponse.ok(true));
+    }
+
+    /**
+     * 根据课程ID获取课程基本信息
+     *
+     * @param id 课程ID
+     * @return 课程基本信息
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<CommonResponse<CourseAndDescriptionVo>> getCourseAndDescription(@PathVariable String id) {
+        CourseAndDescriptionVo responseBody = eduCourseService.getCourseAndDescription(id);
+        return ResponseEntity.ok(CommonResponse.ok(responseBody));
     }
 }
 

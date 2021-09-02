@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.catmmao.edu.dao.mapper.EduChapterMapper;
-import com.catmmao.edu.dao.mapper.EduCourseDescriptionMapper;
 import com.catmmao.edu.dao.mapper.EduCourseMapper;
 import com.catmmao.edu.dao.mapper.EduVideoMapper;
 import com.catmmao.edu.data.response.PageResponse;
@@ -33,9 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("eduCourseService")
 public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService {
-    @Resource
-    EduCourseDescriptionMapper eduCourseDescriptionMapper;
-
     @Resource
     EduChapterMapper eduChapterMapper;
 
@@ -129,6 +125,15 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         if (!eduCourseDescriptionService.saveOrUpdate(courseDescription)) {
             throw HttpException.databaseError("C0300", "课程信息更新失败");
         }
+    }
+
+    @Transactional
+    @Override
+    public CourseAndDescriptionVo getCourseAndDescription(String id) {
+        CourseAndDescriptionVo result = new CourseAndDescriptionVo();
+        BeanUtils.copyProperties(eduCourseDescriptionService.getById(id), result);
+        BeanUtils.copyProperties(getCourse(id), result);
+        return result;
     }
 
     /**
