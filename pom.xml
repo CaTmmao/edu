@@ -34,6 +34,8 @@
         <fastjson.version>1.2.28</fastjson.version>
         <json.version>20170516</json.version>
         <gson.version>2.8.2</gson.version>
+        <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+        <nacos-discovery.version>1.4.1</nacos-discovery.version>
     </properties>
 
     <dependencyManagement>
@@ -89,6 +91,15 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${swagger.version}</version>
+            </dependency>
+
+            <!--spring cloud alibaba 依赖-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

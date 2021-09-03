@@ -44,6 +44,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
+        <!--依赖 spring cloud alibaba 的 nacos 服务发现-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
         <!--不使用 spring boot 默认的日志框架-->
         <!--<dependency>-->
         <!--    <groupId>org.springframework.boot</groupId>-->
