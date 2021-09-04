@@ -1,4 +1,4 @@
-package com.catmmao.edu.data.response;
+package com.catmmao.utils.data.response;
 
 import java.util.Collections;
 

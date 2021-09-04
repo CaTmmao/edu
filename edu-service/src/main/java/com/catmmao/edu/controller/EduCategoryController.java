@@ -3,7 +3,7 @@ package com.catmmao.edu.controller;
 import java.util.List;
 import javax.annotation.Resource;
 
-import com.catmmao.edu.data.response.CommonResponse;
+import com.catmmao.utils.data.response.CommonResponse;
 import com.catmmao.edu.entity.vo.CategoryAndListOfSubcategoryVo;
 import com.catmmao.edu.service.EduCategoryService;
 import org.springframework.http.ResponseEntity;

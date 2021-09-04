@@ -2,7 +2,7 @@ package com.catmmao.edu.controller;
 
 import javax.annotation.Resource;
 
-import com.catmmao.edu.data.response.CommonResponse;
+import com.catmmao.utils.data.response.CommonResponse;
 import com.catmmao.edu.service.VideoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

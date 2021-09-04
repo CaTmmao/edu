@@ -7,7 +7,7 @@ import com.aliyun.vod.upload.impl.UploadVideoImpl;
 import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.catmmao.edu.common.Constant;
-import com.catmmao.edu.exception.HttpException;
+import com.catmmao.utils.exception.HttpException;
 import com.catmmao.edu.service.VideoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

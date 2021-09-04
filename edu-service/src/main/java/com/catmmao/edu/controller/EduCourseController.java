@@ -3,8 +3,8 @@ package com.catmmao.edu.controller;
 import java.util.List;
 import javax.annotation.Resource;
 
-import com.catmmao.edu.data.response.CommonResponse;
-import com.catmmao.edu.data.response.PageResponse;
+import com.catmmao.utils.data.response.CommonResponse;
+import com.catmmao.utils.data.response.PageResponse;
 import com.catmmao.edu.entity.EduCourse;
 import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;

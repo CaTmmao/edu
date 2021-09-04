@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.catmmao.edu.dao.mapper.EduCategoryMapper;
 import com.catmmao.edu.entity.EduCategory;
 import com.catmmao.edu.entity.vo.CategoryAndListOfSubcategoryVo;
-import com.catmmao.edu.exception.HttpException;
+import com.catmmao.utils.exception.HttpException;
 import com.catmmao.edu.service.EduCategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,8 @@ public class EduCategoryServiceImpl extends ServiceImpl<EduCategoryMapper, EduCa
         // 获取一级分类列表
         List<EduCategory> list = getCategoryListByParentId("0");
         List<CategoryAndListOfSubcategoryVo> result = list.stream()
-            .map(this::convertEduCategory)
-            .collect(Collectors.toList());
+                .map(this::convertEduCategory)
+                .collect(Collectors.toList());
 
         // 给一级分类填充子分类列表
         result.forEach(item -> {

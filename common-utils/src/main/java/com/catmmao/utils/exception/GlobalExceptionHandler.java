@@ -1,6 +1,6 @@
-package com.catmmao.edu.exception;
+package com.catmmao.utils.exception;
 
-import com.catmmao.edu.data.response.CommonResponse;
+import com.catmmao.utils.data.response.CommonResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

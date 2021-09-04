@@ -1,10 +1,8 @@
 package com.catmmao.edu.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Resource;
 
-import com.catmmao.edu.data.response.CommonResponse;
+import com.catmmao.utils.data.response.CommonResponse;
 import com.catmmao.edu.service.FileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

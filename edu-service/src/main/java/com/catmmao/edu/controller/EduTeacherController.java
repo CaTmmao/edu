@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.catmmao.edu.data.response.CommonResponse;
-import com.catmmao.edu.data.response.PageResponse;
+import com.catmmao.utils.data.response.CommonResponse;
+import com.catmmao.utils.data.response.PageResponse;
 import com.catmmao.edu.entity.EduTeacher;
 import com.catmmao.edu.service.EduTeacherService;
 import org.apache.logging.log4j.util.Strings;

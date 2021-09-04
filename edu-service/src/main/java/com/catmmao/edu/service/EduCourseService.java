@@ -3,7 +3,7 @@ package com.catmmao.edu.service;
 import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.catmmao.edu.data.response.PageResponse;
+import com.catmmao.utils.data.response.PageResponse;
 import com.catmmao.edu.entity.EduCourse;
 import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;

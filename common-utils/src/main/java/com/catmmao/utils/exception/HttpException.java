@@ -1,4 +1,4 @@
-package com.catmmao.edu.exception;
+package com.catmmao.utils.exception;
 
 import org.springframework.http.HttpStatus;
 
