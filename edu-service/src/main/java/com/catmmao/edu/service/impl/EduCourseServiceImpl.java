@@ -9,16 +9,16 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.catmmao.edu.dao.mapper.EduChapterMapper;
 import com.catmmao.edu.dao.mapper.EduCourseMapper;
 import com.catmmao.edu.dao.mapper.EduVideoMapper;
-import com.catmmao.utils.data.response.PageResponse;
 import com.catmmao.edu.entity.EduChapter;
 import com.catmmao.edu.entity.EduCourse;
 import com.catmmao.edu.entity.EduCourseDescription;
 import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;
 import com.catmmao.edu.entity.vo.PageCourseRequestBody;
-import com.catmmao.utils.exception.HttpException;
 import com.catmmao.edu.service.EduCourseDescriptionService;
 import com.catmmao.edu.service.EduCourseService;
+import com.catmmao.utils.data.response.PageResponse;
+import com.catmmao.utils.exception.HttpException;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -131,8 +131,14 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Transactional
     @Override
     public CourseAndDescriptionVo getCourseAndDescription(String id) {
+
         CourseAndDescriptionVo result = new CourseAndDescriptionVo();
-        BeanUtils.copyProperties(eduCourseDescriptionService.getById(id), result);
+
+        EduCourseDescription courseDescription = eduCourseDescriptionService.getById(id);
+        if (courseDescription != null) {
+            BeanUtils.copyProperties(eduCourseDescriptionService.getById(id), result);
+        }
+
         BeanUtils.copyProperties(getCourse(id), result);
         return result;
     }
