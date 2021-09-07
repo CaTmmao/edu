@@ -60,6 +60,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             chapterVo.getChildren().forEach(eduVideo -> {
                 if (!eduVideo.getTitle().isEmpty()) {
                     eduVideo.setChapterId(chapterId);
+                    eduVideo.setCourseId(courseId);
                     eduVideoMapper.insert(eduVideo);
                 }
             });
