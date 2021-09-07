@@ -143,7 +143,7 @@ public class EduTeacherController {
         Integer totalPage = total % pageSize == 0 ? total / pageSize : total / pageSize + 1;
 
         PageResponse<List<EduTeacher>> responseBody =
-            PageResponse.pageOk(pageSize, pageNum, totalPage, pageTeacher.getRecords());
+            PageResponse.pageOk(pageSize, pageNum, total, totalPage, pageTeacher.getRecords());
 
         return ResponseEntity.ok(responseBody);
     }
