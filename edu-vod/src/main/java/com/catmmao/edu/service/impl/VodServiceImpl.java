@@ -6,15 +6,19 @@ import java.io.InputStream;
 import com.aliyun.vod.upload.impl.UploadVideoImpl;
 import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
 import com.catmmao.edu.common.Constant;
+import com.catmmao.edu.common.VodUtils;
+import com.catmmao.edu.service.VodService;
 import com.catmmao.utils.exception.HttpException;
-import com.catmmao.edu.service.VideoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class VideoServiceImpl implements VideoService {
+public class VodServiceImpl implements VodService {
+
     @Override
     public String uploadVideo(MultipartFile file) {
         String videoId;
@@ -33,7 +37,7 @@ public class VideoServiceImpl implements VideoService {
         }
 
         UploadStreamRequest request =
-            new UploadStreamRequest(accessKeyId, accessKeySecret, title, fileName, inputStream);
+                new UploadStreamRequest(accessKeyId, accessKeySecret, title, fileName, inputStream);
         UploadVideoImpl uploader = new UploadVideoImpl();
         UploadStreamResponse response = uploader.uploadStream(request);
 
@@ -45,5 +49,31 @@ public class VideoServiceImpl implements VideoService {
         }
 
         return videoId;
+    }
+
+    /**
+     * 删除视频
+     *
+     * @param vodId 视频ID
+     */
+    @Override
+    public void deleteVideo(String vodId) {
+
+        try {
+            DefaultAcsClient client = VodUtils.initVodClient(Constant.ACCESSKEYID, Constant.ACCESSKEYSECRET);
+            DeleteVideoRequest deleteVideoRequest = new DeleteVideoRequest();
+            deleteVideoRequest.setVideoIds(vodId);
+            client.getAcsResponse(deleteVideoRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+            String errorCodeAndMessage = e.getLocalizedMessage();
+
+            // 视频不存在
+            if (errorCodeAndMessage.contains("InvalidVideo.NotFound")) {
+                throw HttpException.resourceNotFound("A0400", "不存在vodId为" +vodId + "的视频，删除失败");
+            } else if (errorCodeAndMessage.contains("DeleteVideoFailed")) {
+                throw new HttpException("A0500", HttpStatus.INTERNAL_SERVER_ERROR, "删除视频失败，请稍后重试。");
+            }
+        }
     }
 }

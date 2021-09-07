@@ -2,11 +2,13 @@ package com.catmmao.edu.controller;
 
 import javax.annotation.Resource;
 
+import com.catmmao.edu.service.VodService;
 import com.catmmao.utils.data.response.CommonResponse;
-import com.catmmao.edu.service.VideoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,9 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/vod")
 @CrossOrigin
-public class VideoController {
+public class VodController {
     @Resource
-    private VideoService videoService;
+    private VodService videoService;
 
     /**
      * 上传视频到阿里云vod
@@ -28,7 +30,19 @@ public class VideoController {
      */
     @PostMapping
     public ResponseEntity<CommonResponse<String>> uploadVideo(@RequestParam("file") MultipartFile file) {
+        //if (file.isEmpty() || )
         String result = videoService.uploadVideo(file);
         return ResponseEntity.status(HttpStatus.CREATED).body(CommonResponse.ok(result));
+    }
+
+    /**
+     * 删除阿里云视频
+     *
+     * @param id 阿里云生成的视频ID
+     */
+    @DeleteMapping("/{id}")
+    void deleteVideo(@PathVariable String id) {
+
+        videoService.deleteVideo(id);
     }
 }
