@@ -8,7 +8,6 @@ import com.catmmao.edu.dao.mapper.EduVideoMapper;
 import com.catmmao.edu.entity.EduVideo;
 import com.catmmao.edu.service.EduVideoService;
 import com.catmmao.utils.exception.HttpException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,7 +28,7 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
         EduVideo eduVideo = getVideo(id);
         String vodId = eduVideo.getVodId();
 
-        if (!vodId.isEmpty()) {
+        if (vodId != null && !vodId.isEmpty()) {
             vodClient.deleteVideo(vodId);
         }
 
