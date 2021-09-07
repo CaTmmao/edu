@@ -197,7 +197,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
      * @param course 课程信息
      */
     private void addCourse(EduCourse course) {
-        if (this.save(course)) {
+        if (!this.save(course)) {
             throw HttpException.databaseError("C0300", "课程信息保存失败");
         }
     }
