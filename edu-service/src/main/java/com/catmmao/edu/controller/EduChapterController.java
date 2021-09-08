@@ -68,7 +68,7 @@ public class EduChapterController {
     @PostMapping
     public ResponseEntity<CommonResponse<Boolean>> addChapter(@RequestBody EduChapter chapter) {
         if (chapter.getCourseId() == null) {
-            throw HttpException.badRequest("未传入 courseId", "A0410");
+            throw HttpException.badRequest("未传入 courseId");
         }
         eduChapterService.addChapter(chapter);
         return ResponseEntity.status(HttpStatus.CREATED).body(CommonResponse.ok(true));

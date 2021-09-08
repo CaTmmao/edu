@@ -34,7 +34,7 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
 
         if (!this.removeById(id)) {
 
-            throw HttpException.databaseError("C0300", "数据库中的视频信息删除失败");
+            throw HttpException.databaseError("数据库中的视频信息删除失败");
         }
     }
 
@@ -48,7 +48,7 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
 
         EduVideo result = this.getById(id);
         if (result == null) {
-            throw HttpException.resourceNotFound("C0300", "找不到ID为" + id + "的信息");
+            throw HttpException.resourceNotFound("找不到ID为" + id + "的信息");
         }
 
         return result;

@@ -53,7 +53,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             chapter.setCourseId(courseId);
             int affectedRow = eduChapterMapper.insert(chapter);
             if (affectedRow == 0) {
-                throw HttpException.databaseError("C0300", "章节插入失败");
+                throw HttpException.databaseError("章节插入失败");
             }
             String chapterId = chapter.getId();
 
@@ -124,7 +124,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         EduCourseDescription courseDescription = new EduCourseDescription();
         BeanUtils.copyProperties(courseAndDescriptionVo, courseDescription);
         if (!eduCourseDescriptionService.saveOrUpdate(courseDescription)) {
-            throw HttpException.databaseError("C0300", "课程信息更新失败");
+            throw HttpException.databaseError("课程信息更新失败");
         }
     }
 
@@ -153,7 +153,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         getCourse(id);
 
         if (!this.updateById(newCourse)) {
-            throw HttpException.databaseError("C0300", "课程信息更新失败");
+            throw HttpException.databaseError("课程信息更新失败");
         }
     }
 
@@ -166,7 +166,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     private EduCourse getCourse(String courseId) {
         EduCourse result = this.getById(courseId);
         if (result == null) {
-            throw HttpException.resourceNotFound("C0300", "找不到id为 " + courseId + " 的课程");
+            throw HttpException.resourceNotFound("找不到id为 " + courseId + " 的课程");
         }
 
         return result;
@@ -191,7 +191,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         EduCourseDescription eduCourseDescription = new EduCourseDescription();
         BeanUtils.copyProperties(courseAndDescriptionVo, eduCourseDescription);
         if (!eduCourseDescriptionService.save(eduCourseDescription)) {
-            throw HttpException.databaseError("C0300", "课程简介保存失败");
+            throw HttpException.databaseError("课程简介保存失败");
         }
 
         return courseId;
@@ -204,7 +204,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
      */
     private void addCourse(EduCourse course) {
         if (!this.save(course)) {
-            throw HttpException.databaseError("C0300", "课程信息保存失败");
+            throw HttpException.databaseError("课程信息保存失败");
         }
     }
 }

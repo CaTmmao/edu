@@ -72,14 +72,14 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
 
         // 删除章节
         if (!removeById(id)) {
-            throw HttpException.databaseError("C0300", "章节删除失败");
+            throw HttpException.databaseError("章节删除失败");
         }
     }
 
     @Override
     public void addChapter(EduChapter chapter) {
         if (!this.save(chapter)) {
-            throw HttpException.databaseError("C0300", "添加章节失败");
+            throw HttpException.databaseError("添加章节失败");
         }
     }
 
@@ -95,7 +95,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
                 .collect(Collectors.toList());
 
         if (!eduVideoService.removeByIds(videoIdList)) {
-            throw HttpException.databaseError("C0300", "视频删除失败");
+            throw HttpException.databaseError("视频删除失败");
         }
     }
 
@@ -161,7 +161,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
 
         EduChapter result = this.getById(id);
         if (result == null) {
-            throw HttpException.resourceNotFound("C0300", "找不到id为" + id + "的章节信息");
+            throw HttpException.resourceNotFound("找不到id为" + id + "的章节信息");
         }
 
         return result;

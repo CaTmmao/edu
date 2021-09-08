@@ -58,7 +58,7 @@ public class EduTeacherController {
     @PostMapping
     public ResponseEntity<CommonResponse<?>> createTeacher(@RequestBody EduTeacher eduTeacher) {
         boolean isSuccess = eduTeacherService.save(eduTeacher);
-        CommonResponse<?> responseBody = isSuccess ? CommonResponse.ok(null) : CommonResponse.error("C0300", "创建失败");
+        CommonResponse<?> responseBody = isSuccess ? CommonResponse.ok(null) : CommonResponse.error("创建失败");
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }
@@ -69,7 +69,7 @@ public class EduTeacherController {
         eduTeacher.setId(id);
         boolean isSuccess = eduTeacherService.updateById(eduTeacher);
 
-        CommonResponse<?> responseBody = isSuccess ? CommonResponse.ok(null) : CommonResponse.error("C0300", "更新失败");
+        CommonResponse<?> responseBody = isSuccess ? CommonResponse.ok(null) : CommonResponse.error("更新失败");
         return ResponseEntity.ok(responseBody);
     }
 

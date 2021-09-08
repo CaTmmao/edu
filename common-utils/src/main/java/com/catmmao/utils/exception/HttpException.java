@@ -10,36 +10,33 @@ public class HttpException extends RuntimeException {
     private String message;
     // 状态码
     private HttpStatus httpStatus;
-    // 错误代码
-    private String errorCode;
 
-    public HttpException(String message, HttpStatus httpStatus, String errorCode) {
+    public HttpException(String message, HttpStatus httpStatus) {
         this.message = message;
         this.httpStatus = httpStatus;
-        this.errorCode = errorCode;
     }
 
     // 找不到资源
-    public static HttpException resourceNotFound(String errorCode, String message) {
-        return new HttpException(message, HttpStatus.NOT_FOUND, errorCode);
+    public static HttpException resourceNotFound(String message) {
+        return new HttpException(message, HttpStatus.NOT_FOUND);
     }
 
     // 前端请求参数错误
-    public static HttpException badRequest(String message, String errorCode) {
-        return new HttpException(message, HttpStatus.BAD_REQUEST, errorCode);
+    public static HttpException badRequest(String message) {
+        return new HttpException(message, HttpStatus.BAD_REQUEST);
     }
 
-    public static HttpException forbidden(String message, String errorCode) {
-        return new HttpException(message, HttpStatus.FORBIDDEN, errorCode);
+    public static HttpException forbidden(String message) {
+        return new HttpException(message, HttpStatus.FORBIDDEN);
     }
 
     // 数据库服务出错
-    public static HttpException databaseError(String errorCode, String message) {
-        return new HttpException(message, HttpStatus.INTERNAL_SERVER_ERROR, errorCode);
+    public static HttpException databaseError(String message) {
+        return new HttpException(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public static HttpException gone(String message, String errorCode) {
-        return new HttpException(message, HttpStatus.GONE, errorCode);
+    public static HttpException gone(String message) {
+        return new HttpException(message, HttpStatus.GONE);
     }
 
     @Override
@@ -57,13 +54,5 @@ public class HttpException extends RuntimeException {
 
     public void setHttpStatus(HttpStatus httpStatus) {
         this.httpStatus = httpStatus;
-    }
-
-    public String getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
     }
 }

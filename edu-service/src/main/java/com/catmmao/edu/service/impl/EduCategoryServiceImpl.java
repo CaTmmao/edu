@@ -50,7 +50,7 @@ public class EduCategoryServiceImpl extends ServiceImpl<EduCategoryMapper, EduCa
         List<EduCategory> result = baseMapper.selectList(queryWrapper);
 
         if (result.size() == 0) {
-            throw HttpException.resourceNotFound("C0312", "找不到 parentId 为 " + parentId + " 的数据");
+            throw HttpException.resourceNotFound("找不到 parentId 为 " + parentId + " 的数据");
         }
 
         return result;

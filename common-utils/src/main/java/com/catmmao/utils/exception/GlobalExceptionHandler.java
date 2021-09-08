@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler(HttpException.class)
     ResponseEntity<CommonResponse<?>> handleHttpException(HttpException e) {
-        CommonResponse<?> responseBody = CommonResponse.error(e.getErrorCode(), e.getMessage());
+        CommonResponse<?> responseBody = CommonResponse.error(e.getMessage());
         return ResponseEntity.status(e.getHttpStatus()).body(responseBody);
     }
 }

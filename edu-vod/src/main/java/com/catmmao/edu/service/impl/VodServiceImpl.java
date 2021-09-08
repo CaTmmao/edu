@@ -45,7 +45,7 @@ public class VodServiceImpl implements VodService {
 
         if (videoId.isEmpty()) {
             String message = "ErrorMessage=" + response.getMessage() + "\n ErrorCode=" + response.getCode();
-            throw new HttpException(message, HttpStatus.INTERNAL_SERVER_ERROR, "A0700");
+            throw new HttpException(message, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return videoId;
@@ -70,9 +70,9 @@ public class VodServiceImpl implements VodService {
 
             // 视频不存在
             if (errorCodeAndMessage.contains("InvalidVideo.NotFound")) {
-                throw HttpException.resourceNotFound("A0400", "不存在vodId为" +vodId + "的视频，删除失败");
+                throw HttpException.resourceNotFound("不存在vodId为" +vodId + "的视频，删除失败");
             } else if (errorCodeAndMessage.contains("DeleteVideoFailed")) {
-                throw new HttpException("A0500", HttpStatus.INTERNAL_SERVER_ERROR, "删除视频失败，请稍后重试。");
+                throw new HttpException("删除视频失败，请稍后重试。", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
     }

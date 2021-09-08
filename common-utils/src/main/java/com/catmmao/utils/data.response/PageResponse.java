@@ -28,9 +28,8 @@ public class PageResponse<T> extends CommonResponse<T> {
         return result;
     }
 
-    public static PageResponse<List<?>> pageError(String code, String message) {
+    public static PageResponse<List<?>> pageError(String message) {
         PageResponse<List<?>> result = new PageResponse<>();
-        result.setCode(code);
         result.setMessage(message);
         result.setData(Collections.emptyList());
         return result;
