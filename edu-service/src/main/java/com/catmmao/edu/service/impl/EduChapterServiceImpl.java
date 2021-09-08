@@ -83,6 +83,18 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         }
     }
 
+    @Override
+    public void updateChapterById(String id, EduChapter chapter) {
+        EduChapter chapterInDb = getById(id);
+        if (chapterInDb == null) {
+            throw HttpException.resourceNotFound("找不到ID为" + id + "的章节");
+        }
+
+        if (!updateById(chapter)) {
+            throw HttpException.databaseError("数据库更新失败");
+        }
+    }
+
     /**
      * 删除数据库中的视频列表
      *

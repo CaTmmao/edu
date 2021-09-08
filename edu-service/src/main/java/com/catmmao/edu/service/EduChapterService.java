@@ -37,5 +37,13 @@ public interface EduChapterService extends IService<EduChapter> {
      * @param chapter 章节信息
      */
     void addChapter(EduChapter chapter);
+
+    /**
+     * 更新章节
+     *
+     * @param id      章节ID
+     * @param chapter 章节信息
+     */
+    void updateChapterById(String id, EduChapter chapter);
 }
 

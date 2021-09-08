@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,6 +63,7 @@ public class EduChapterController {
 
     /**
      * 添加章节
+     *
      * @param chapter 章节信息
      * @return 是否成功
      */
@@ -73,5 +75,19 @@ public class EduChapterController {
         eduChapterService.addChapter(chapter);
         return ResponseEntity.status(HttpStatus.CREATED).body(CommonResponse.ok(true));
     }
-}
 
+    /**
+     * 更新章节
+     *
+     * @param id      章节ID
+     * @param chapter 章节信息
+     * @return 是否更新成功
+     */
+    @PatchMapping("/{id}")
+    public ResponseEntity<CommonResponse<Boolean>> updateChapterById(@PathVariable String id,
+                                                                     @RequestBody EduChapter chapter) {
+
+        eduChapterService.updateChapterById(id, chapter);
+        return ResponseEntity.status(HttpStatus.CREATED).body(CommonResponse.ok(true));
+    }
+}
