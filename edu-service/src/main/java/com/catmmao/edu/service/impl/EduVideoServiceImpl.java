@@ -38,6 +38,14 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
         }
     }
 
+    @Override
+    public void addVideo(EduVideo video) {
+
+        if (!save(video)) {
+            throw HttpException.databaseError("视频保存至数据库失败");
+        }
+    }
+
     /**
      * 获取视频信息
      *
