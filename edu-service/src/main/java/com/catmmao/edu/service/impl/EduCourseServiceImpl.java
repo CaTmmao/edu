@@ -314,6 +314,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         // 插入数据到数据库 edu_course_description 表中
         EduCourseDescription eduCourseDescription = new EduCourseDescription();
         BeanUtils.copyProperties(courseAndDescriptionVo, eduCourseDescription);
+        eduCourseDescription.setId(courseId);
         if (!eduCourseDescriptionService.save(eduCourseDescription)) {
             throw HttpException.databaseError("课程简介保存失败");
         }
