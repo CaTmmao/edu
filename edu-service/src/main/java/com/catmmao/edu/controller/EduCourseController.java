@@ -3,16 +3,17 @@ package com.catmmao.edu.controller;
 import java.util.List;
 import javax.annotation.Resource;
 
-import com.catmmao.utils.data.response.CommonResponse;
-import com.catmmao.utils.data.response.PageResponse;
 import com.catmmao.edu.entity.EduCourse;
 import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;
 import com.catmmao.edu.entity.vo.PageCourseRequestBody;
 import com.catmmao.edu.service.EduCourseService;
+import com.catmmao.utils.data.response.CommonResponse;
+import com.catmmao.utils.data.response.PageResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -89,6 +90,17 @@ public class EduCourseController {
     public ResponseEntity<CommonResponse<CourseAndDescriptionVo>> getCourseAndDescription(@PathVariable String id) {
         CourseAndDescriptionVo responseBody = eduCourseService.getCourseAndDescription(id);
         return ResponseEntity.ok(CommonResponse.ok(responseBody));
+    }
+
+    /**
+     * 删除课程
+     * @param id 课程ID
+     * @return 是否成功
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CommonResponse<Boolean>> deleteCourseCompleteInfoById(@PathVariable String id) {
+        eduCourseService.deleteCourseCompleteInfoById(id);
+        return ResponseEntity.ok(CommonResponse.ok(true));
     }
 }
 

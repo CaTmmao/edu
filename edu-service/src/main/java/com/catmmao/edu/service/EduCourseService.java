@@ -3,11 +3,11 @@ package com.catmmao.edu.service;
 import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.catmmao.utils.data.response.PageResponse;
 import com.catmmao.edu.entity.EduCourse;
 import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;
 import com.catmmao.edu.entity.vo.PageCourseRequestBody;
+import com.catmmao.utils.data.response.PageResponse;
 import org.springframework.stereotype.Service;
 
 /**
@@ -50,5 +50,12 @@ public interface EduCourseService extends IService<EduCourse> {
      * @return 课程基本信息
      */
     CourseAndDescriptionVo getCourseAndDescription(String id);
+
+    /**
+     * 删除课程
+     *
+     * @param id 课程ID
+     */
+    void deleteCourseCompleteInfoById(String id);
 }
 
