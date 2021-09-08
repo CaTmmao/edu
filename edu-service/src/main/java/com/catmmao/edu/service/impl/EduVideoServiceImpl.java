@@ -46,6 +46,17 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
         }
     }
 
+    @Override
+    public void updateVideoById(String id, EduVideo video) {
+        if (getById(id) == null) {
+            throw HttpException.resourceNotFound("数据库中找不到ID为" + id + "的视频");
+        }
+
+        if (!updateById(video)) {
+            throw HttpException.databaseError("视频更新失败");
+        }
+    }
+
     /**
      * 获取视频信息
      *

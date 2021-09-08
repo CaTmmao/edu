@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,6 +54,21 @@ public class EduVideoController {
 
         eduVideoService.addVideo(video);
         return ResponseEntity.status(HttpStatus.CREATED).body(CommonResponse.ok(true));
+    }
+
+    /**
+     * 更新视频
+     *
+     * @param id    视频ID
+     * @param video 视频信息
+     * @return 是否成功
+     */
+    @PatchMapping("/{id}")
+    public ResponseEntity<CommonResponse<Boolean>> updateVideoById(@PathVariable String id,
+                                                                   @RequestBody EduVideo video) {
+
+        eduVideoService.updateVideoById(id, video);
+        return ResponseEntity.ok(CommonResponse.ok(true));
     }
 }
 
