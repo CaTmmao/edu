@@ -3,14 +3,19 @@ package com.catmmao.edu.controller;
 import java.util.List;
 import javax.annotation.Resource;
 
+import com.catmmao.edu.entity.EduChapter;
 import com.catmmao.edu.entity.vo.ChapterVo;
 import com.catmmao.edu.service.EduChapterService;
 import com.catmmao.utils.data.response.CommonResponse;
+import com.catmmao.utils.exception.HttpException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,6 +58,20 @@ public class EduChapterController {
 
         eduChapterService.deleteChapterById(id);
         return ResponseEntity.ok(CommonResponse.ok(true));
+    }
+
+    /**
+     * 添加章节
+     * @param chapter 章节信息
+     * @return 是否成功
+     */
+    @PostMapping
+    public ResponseEntity<CommonResponse<Boolean>> addChapter(@RequestBody EduChapter chapter) {
+        if (chapter.getCourseId() == null) {
+            throw HttpException.badRequest("未传入 courseId", "A0410");
+        }
+        eduChapterService.addChapter(chapter);
+        return ResponseEntity.status(HttpStatus.CREATED).body(CommonResponse.ok(true));
     }
 }
 

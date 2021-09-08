@@ -76,6 +76,13 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         }
     }
 
+    @Override
+    public void addChapter(EduChapter chapter) {
+        if (!this.save(chapter)) {
+            throw HttpException.databaseError("C0300", "添加章节失败");
+        }
+    }
+
     /**
      * 删除数据库中的视频列表
      *
