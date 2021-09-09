@@ -50,7 +50,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
-        <!--依赖 spring cloud alibaba 的 nacos 实现服务的注册与发现-->
+        <!--依赖 spring cloud alibaba 的 nacos-discovery 实现服务注册与发现-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
