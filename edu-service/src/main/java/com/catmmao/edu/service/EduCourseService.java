@@ -57,5 +57,12 @@ public interface EduCourseService extends IService<EduCourse> {
      * @param id 课程ID
      */
     void deleteCourseCompleteInfoById(String id);
+
+    /**
+     * 获取热门课程列表
+     *
+     * @return 热门课程列表
+     */
+    List<EduCourse> getHotCourseList();
 }
 

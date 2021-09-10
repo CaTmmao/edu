@@ -94,6 +94,7 @@ public class EduCourseController {
 
     /**
      * 删除课程
+     *
      * @param id 课程ID
      * @return 是否成功
      */
@@ -101,6 +102,18 @@ public class EduCourseController {
     public ResponseEntity<CommonResponse<Boolean>> deleteCourseCompleteInfoById(@PathVariable String id) {
         eduCourseService.deleteCourseCompleteInfoById(id);
         return ResponseEntity.ok(CommonResponse.ok(true));
+    }
+
+    /**
+     * 获取热门课程列表
+     *
+     * @return 热门课程列表
+     */
+    @GetMapping("/front/index/hot/list")
+    public ResponseEntity<CommonResponse<List<EduCourse>>> getHotCourseList() {
+
+        List<EduCourse> data = eduCourseService.getHotCourseList();
+        return ResponseEntity.ok(CommonResponse.ok(data));
     }
 }
 

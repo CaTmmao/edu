@@ -187,6 +187,15 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         }
     }
 
+    @Override
+    public List<EduCourse> getHotCourseList() {
+
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("buy_count");
+        wrapper.last("limit 8");
+        return list(wrapper);
+    }
+
     /**
      * 删除所有video
      *
