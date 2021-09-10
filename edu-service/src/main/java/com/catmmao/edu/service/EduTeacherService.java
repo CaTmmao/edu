@@ -1,8 +1,10 @@
 package com.catmmao.edu.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.catmmao.edu.entity.EduTeacher;
+import org.springframework.stereotype.Service;
 
 /**
  * 讲师(EduTeacher)表服务接口
@@ -13,5 +15,11 @@ import com.catmmao.edu.entity.EduTeacher;
 @Service
 public interface EduTeacherService extends IService<EduTeacher> {
 
+    /**
+     * 获取热门老师列表
+     *
+     * @return 热门老师列表
+     */
+    List<EduTeacher> getHotTeacherList();
 }
 

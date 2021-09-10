@@ -7,10 +7,10 @@ import javax.annotation.Resource;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.catmmao.utils.data.response.CommonResponse;
-import com.catmmao.utils.data.response.PageResponse;
 import com.catmmao.edu.entity.EduTeacher;
 import com.catmmao.edu.service.EduTeacherService;
+import com.catmmao.utils.data.response.CommonResponse;
+import com.catmmao.utils.data.response.PageResponse;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +37,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class EduTeacherController {
     @Resource
     private EduTeacherService eduTeacherService;
+
+    /**
+     * 获取热门老师列表
+     *
+     * @return 热门老师列表
+     */
+    @GetMapping("/front/index/hot/list")
+    public ResponseEntity<CommonResponse<List<EduTeacher>>> getHotTeacherList() {
+
+        List<EduTeacher> data = eduTeacherService.getHotTeacherList();
+        return ResponseEntity.ok(CommonResponse.ok(data));
+    }
 
     /**
      * 获取讲师列表
@@ -109,7 +121,7 @@ public class EduTeacherController {
     public ResponseEntity<PageResponse<List<EduTeacher>>> pageTeacherCondition(@RequestParam Integer pageNum,
                                                                                @RequestParam Integer pageSize,
                                                                                @RequestBody(required = false)
-                                                                                   PageTeacherConditionRequestBody pageTeacherRequestBody) {
+                                                                                       PageTeacherConditionRequestBody pageTeacherRequestBody) {
         Page<EduTeacher> pageTeacher = new Page<>(pageNum, pageSize);
 
         if (pageTeacherRequestBody != null) {
@@ -143,7 +155,7 @@ public class EduTeacherController {
         Integer totalPage = total % pageSize == 0 ? total / pageSize : total / pageSize + 1;
 
         PageResponse<List<EduTeacher>> responseBody =
-            PageResponse.pageOk(pageSize, pageNum, total, totalPage, pageTeacher.getRecords());
+                PageResponse.pageOk(pageSize, pageNum, total, totalPage, pageTeacher.getRecords());
 
         return ResponseEntity.ok(responseBody);
     }
