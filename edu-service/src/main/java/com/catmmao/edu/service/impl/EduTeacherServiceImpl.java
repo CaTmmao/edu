@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.catmmao.edu.dao.mapper.EduTeacherMapper;
 import com.catmmao.edu.entity.EduTeacher;
 import com.catmmao.edu.service.EduTeacherService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 @Service("eduTeacherService")
 public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeacher> implements EduTeacherService {
 
+    @Cacheable(key = "'getHotTeacherList'", value = "teacher")
     @Override
     public List<EduTeacher> getHotTeacherList() {
 

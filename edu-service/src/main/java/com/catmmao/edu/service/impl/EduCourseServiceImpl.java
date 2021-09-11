@@ -26,6 +26,7 @@ import com.catmmao.utils.data.response.PageResponse;
 import com.catmmao.utils.exception.HttpException;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -187,6 +188,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         }
     }
 
+    @Cacheable(key = "'getHotCourseList'", value = "course")
     @Override
     public List<EduCourse> getHotCourseList() {
 
