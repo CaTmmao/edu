@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.catmmao.edu.dao.mapper.CrmBannerMapper;
 import com.catmmao.edu.entity.CrmBanner;
 import com.catmmao.edu.service.CrmBannerService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 @Service("crmBannerService")
 public class CrmBannerServiceImpl extends ServiceImpl<CrmBannerMapper, CrmBanner> implements CrmBannerService {
 
+    @Cacheable(key = "'getFrontIndexBannerList'", value = "banner")
     @Override
     public List<CrmBanner> getFrontIndexBannerList() {
 

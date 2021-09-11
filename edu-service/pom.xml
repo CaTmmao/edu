@@ -90,6 +90,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
+
+        <!-- spring boot cache support 支持缓存功能 -->
+        <!--默认将数据缓存在内存中，如果想要将数据缓存在redis中需要添加redis依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
