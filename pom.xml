@@ -17,13 +17,8 @@
     <description>在线教育项目父pom</description>
 
     <modules>
-        <module>edu-service</module>
-        <module>edu-oss</module>
-        <module>edu-vod</module>
-        <module>common-utils</module>
-        <module>edu-sms</module>
-        <module>edu-user</module>
-        <module>common-database</module>
+        <module>common</module>
+        <module>service</module>
     </modules>
 
     <properties>
