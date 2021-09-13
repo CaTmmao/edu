@@ -21,6 +21,7 @@
         <module>edu-oss</module>
         <module>edu-vod</module>
         <module>common-utils</module>
+        <module>edu-sms</module>
     </modules>
 
     <properties>
