@@ -33,7 +33,7 @@ public class UserController {
      *
      * @param data 注册信息
      */
-    @PostMapping("/session")
+    @PostMapping("/register")
     public ResponseEntity<CommonResponse<?>> signUp(@RequestBody SignUpVo data) {
 
         if (data.getCode() == null || data.getEmail() == null || data.getNickname() == null ||
