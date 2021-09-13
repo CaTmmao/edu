@@ -2,6 +2,7 @@ package com.catmmao.edu.controller;
 
 import javax.annotation.Resource;
 
+import com.catmmao.edu.entity.User;
 import com.catmmao.edu.entity.vo.SignUpVo;
 import com.catmmao.edu.service.UserService;
 import com.catmmao.utils.data.response.CommonResponse;
@@ -42,6 +43,23 @@ public class UserController {
 
         userService.signUp(data);
         return ResponseEntity.ok(CommonResponse.ok(null));
+    }
+
+    /**
+     * 用户登录
+     *
+     * @param user 用户邮箱和密码
+     * @return token
+     */
+    @PostMapping("/login")
+    public ResponseEntity<CommonResponse<String>> login(@RequestBody User user) {
+
+        if (user.getEmail() == null || user.getPassword() == null) {
+            throw HttpException.badRequest("参数不完整");
+        }
+
+        String token = userService.login(user);
+        return ResponseEntity.ok(CommonResponse.ok(token));
     }
 }
 

@@ -20,5 +20,12 @@ public interface UserService extends IService<User> {
      * @param data 注册信息
      */
     void signUp(SignUpVo data);
+
+    /**
+     * 用户登录
+     * @param user 用户邮箱和密码
+     * @return token
+     */
+    String login(User user);
 }
 

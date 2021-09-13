@@ -9,6 +9,7 @@ import com.catmmao.edu.dao.mapper.UserMapper;
 import com.catmmao.edu.entity.User;
 import com.catmmao.edu.entity.vo.SignUpVo;
 import com.catmmao.edu.service.UserService;
+import com.catmmao.edu.utils.JwtUtils;
 import com.catmmao.utils.exception.HttpException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -49,6 +50,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (!save(user)) {
             throw HttpException.databaseError("注册失败");
         }
+    }
+
+    @Override
+    public String login(User user) {
+
+        String email = user.getEmail();
+        String password = SecureUtil.md5(user.getPassword());
+
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("email", email);
+        User userInDb = getOne(wrapper);
+
+        if (userInDb == null) {
+            throw HttpException.badRequest("不存在该用户");
+        }
+
+        if (!password.equals(userInDb.getPassword())) {
+            throw HttpException.badRequest("密码错误");
+        }
+
+        if (userInDb.getIsDisabled()) {
+            throw HttpException.forbidden("用户被禁用");
+        }
+
+        // 生成token
+        return JwtUtils.generateToken(userInDb.getId(), userInDb.getNickname());
     }
 
     /**
