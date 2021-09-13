@@ -9,21 +9,28 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common-utils</artifactId>
+    <artifactId>common-database</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>common-utils</name>
-    <description>公共类</description>
+    <name>common-database</name>
+    <description>需要使用数据库相关的服务可依赖此模块，由该模块统一配置</description>
 
     <dependencies>
+        <!--mysql 驱动-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <!--hutool-->
+        <!-- mybatis-plus -->
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+
+        <!--swagger -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
         </dependency>
     </dependencies>
 </project>
