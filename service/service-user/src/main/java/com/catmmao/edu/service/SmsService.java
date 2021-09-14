@@ -7,9 +7,9 @@ package com.catmmao.edu.service;
 public interface SmsService {
 
     /**
-     * 发送邮箱验证码
+     * 发送注册验证码
      *
      * @param email 邮箱
      */
-    void sendVerificationCode(String email);
+    void sendRegisterVerificationCode(String email);
 }

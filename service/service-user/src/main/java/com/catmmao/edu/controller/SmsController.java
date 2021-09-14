@@ -26,18 +26,18 @@ public class SmsController {
     private SmsService smsService;
 
     /**
-     * 发送邮箱验证码
+     * 发送注册验证码
      *
      * @param email 邮箱
      */
     @GetMapping
-    public ResponseEntity<CommonResponse<?>> sendVerificationCode(@RequestParam String email) {
+    public ResponseEntity<CommonResponse<?>> sendRegisterVerificationCode(@RequestParam String email) {
 
         if (Strings.isEmpty(email)) {
             throw HttpException.badRequest("请输入邮箱");
         }
 
-        smsService.sendVerificationCode(email);
+        smsService.sendRegisterVerificationCode(email);
         return ResponseEntity.ok(CommonResponse.ok(null));
     }
 }

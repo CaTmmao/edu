@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import com.catmmao.edu.service.SmsService;
 import com.catmmao.edu.utils.EMailUtil;
+import com.catmmao.utils.exception.HttpException;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,19 @@ public class SmsServiceImpl implements SmsService {
     @Resource
     private RedisTemplate<String, String> redisTemplate;
 
+    @Resource
+    private UserServiceImpl userService;
+
     @Override
-    public void sendVerificationCode(String email) {
+    public void sendRegisterVerificationCode(String email) {
 
         String code = redisTemplate.opsForValue().get(email);
         if (Strings.isEmpty(code)) {
+
+            // 判断是否存在该邮箱
+            if (userService.emailIfExistInDb(email)) {
+                throw HttpException.forbidden("该邮箱已注册");
+            }
 
             // 生成随机数
             code = generate6DigitRandomNumber();
