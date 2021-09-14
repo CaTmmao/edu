@@ -64,5 +64,13 @@ public interface EduCourseService extends IService<EduCourse> {
      * @return 热门课程列表
      */
     List<EduCourse> getHotCourseList();
+
+    /**
+     * 根据讲师ID获取课程列表
+     *
+     * @param teacherId 讲师ID
+     * @return 课程列表
+     */
+    List<EduCourse> getCourseListByTeacherId(String teacherId);
 }
 

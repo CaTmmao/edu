@@ -198,6 +198,14 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         return list(wrapper);
     }
 
+    @Override
+    public List<EduCourse> getCourseListByTeacherId(String teacherId) {
+
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.eq("teacher_id", teacherId);
+        return list(wrapper);
+    }
+
     /**
      * 删除所有video
      *

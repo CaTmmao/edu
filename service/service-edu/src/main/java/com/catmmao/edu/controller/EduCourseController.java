@@ -2,6 +2,7 @@ package com.catmmao.edu.controller;
 
 import java.util.List;
 import javax.annotation.Resource;
+import javax.websocket.server.PathParam;
 
 import com.catmmao.edu.entity.EduCourse;
 import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
@@ -10,6 +11,8 @@ import com.catmmao.edu.entity.vo.PageCourseRequestBody;
 import com.catmmao.edu.service.EduCourseService;
 import com.catmmao.utils.data.response.CommonResponse;
 import com.catmmao.utils.data.response.PageResponse;
+import com.catmmao.utils.exception.HttpException;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -115,5 +118,24 @@ public class EduCourseController {
         List<EduCourse> data = eduCourseService.getHotCourseList();
         return ResponseEntity.ok(CommonResponse.ok(data));
     }
+
+    /**
+     * 根据讲师ID获取课程列表
+     *
+     * @param teacherId 讲师ID
+     * @return 课程列表
+     */
+    @GetMapping("/list")
+    public ResponseEntity<CommonResponse<List<EduCourse>>> getCourseListByTeacherId(
+            @PathParam("teacherId") String teacherId) {
+
+        if (Strings.isEmpty(teacherId)) {
+            throw HttpException.badRequest("参数不完整");
+        }
+
+        List<EduCourse> data = eduCourseService.getCourseListByTeacherId(teacherId);
+        return ResponseEntity.ok(CommonResponse.ok(data));
+    }
+
 }
 
