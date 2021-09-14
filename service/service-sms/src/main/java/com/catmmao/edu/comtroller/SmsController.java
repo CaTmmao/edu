@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 
 import com.catmmao.edu.service.SmsService;
 import com.catmmao.utils.data.response.CommonResponse;
+import com.catmmao.utils.exception.HttpException;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +32,10 @@ public class SmsController {
      */
     @GetMapping
     public ResponseEntity<CommonResponse<?>> sendVerificationCode(@RequestParam String email) {
+
+        if (Strings.isEmpty(email)) {
+            throw HttpException.badRequest("请输入邮箱");
+        }
 
         smsService.sendVerificationCode(email);
         return ResponseEntity.ok(CommonResponse.ok(null));
