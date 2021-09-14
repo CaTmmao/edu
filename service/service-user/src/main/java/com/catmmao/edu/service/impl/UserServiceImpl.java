@@ -97,7 +97,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param email 邮箱号
      * @return 是否存在
      */
-    private boolean emailIfExistInDb(String email) {
+    protected boolean emailIfExistInDb(String email) {
 
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("email", email);

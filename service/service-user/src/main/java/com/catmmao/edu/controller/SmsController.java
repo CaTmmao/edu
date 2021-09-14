@@ -1,4 +1,4 @@
-package com.catmmao.edu.comtroller;
+package com.catmmao.edu.controller;
 
 import javax.annotation.Resource;
 
