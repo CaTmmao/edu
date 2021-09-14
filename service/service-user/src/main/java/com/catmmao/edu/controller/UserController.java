@@ -1,14 +1,17 @@
 package com.catmmao.edu.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import com.catmmao.edu.entity.User;
 import com.catmmao.edu.entity.vo.SignUpVo;
 import com.catmmao.edu.service.UserService;
 import com.catmmao.utils.data.response.CommonResponse;
 import com.catmmao.utils.exception.HttpException;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +63,25 @@ public class UserController {
 
         String token = userService.login(user);
         return ResponseEntity.ok(CommonResponse.ok(token));
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param request http请求对象
+     * @return 用户信息
+     */
+    @GetMapping
+    public ResponseEntity<CommonResponse<User>> getUserInfo(HttpServletRequest request) {
+
+        String token = request.getHeader("token");
+
+        if (Strings.isEmpty(token)) {
+            throw HttpException.forbidden("未登录");
+        }
+
+        User data = userService.getUserInfo(token);
+        return ResponseEntity.ok(CommonResponse.ok(data));
     }
 }
 

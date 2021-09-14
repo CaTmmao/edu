@@ -78,6 +78,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return JwtUtils.generateToken(userInDb.getId(), userInDb.getNickname());
     }
 
+    @Override
+    public User getUserInfo(String token) {
+
+        String userId = JwtUtils.getUserIdByToken(token);
+        User user = getById(userId);
+
+        if (user == null) {
+            throw HttpException.resourceNotFound("找不到该用户");
+        }
+
+        return user;
+    }
+
     /**
      * 数据库中是否已存在该邮箱
      *

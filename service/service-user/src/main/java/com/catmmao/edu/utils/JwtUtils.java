@@ -83,16 +83,10 @@ public class JwtUtils {
     /**
      * 根据 token 获取用户ID
      *
-     * @param request http请求对象
+     * @param token token
      * @return 用户ID
      */
-    public static String getMemberIdByJwtToken(HttpServletRequest request) {
-
-        String token = request.getHeader("token");
-        if (token.isEmpty()) {
-
-            return "";
-        }
+    public static String getUserIdByToken(String token) {
 
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(token);
         // 获取主体信息
