@@ -39,7 +39,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<CommonResponse<?>> signUp(@RequestBody SignUpVo data) {
 
-        if (data.getCode() == null || data.getEmail() == null || data.getNickname() == null ||
+        if (data.getCode() == null || data.getEmail() == null || data.getNickName() == null ||
                 data.getPassword() == null) {
             throw HttpException.badRequest("参数不完整");
         }
