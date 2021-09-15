@@ -10,10 +10,10 @@ import java.io.Serializable;
  * 课程基本信息(EduCourse)实体类
  *
  * @author catmmao
- * @since 2021-08-20 21:06:19
+ * @since 2021-09-15 20:03:39
  */
 public class EduCourse extends Model<EduCourse> implements Serializable {
-    private static final long serialVersionUID = 724432126276896192L;
+    private static final long serialVersionUID = 823131974419513641L;
 
     // 课程id    
     private String id;
@@ -21,8 +21,11 @@ public class EduCourse extends Model<EduCourse> implements Serializable {
     // 课程讲师id    
     private String teacherId;
 
-    // 课程分类id
-    private String categoryId;
+    // 一级分类id
+    private String categoryFirstId;
+
+    // 二级分类id
+    private String categorySecondId;
 
     // 课程标题    
     private String title;
@@ -45,7 +48,7 @@ public class EduCourse extends Model<EduCourse> implements Serializable {
     // 乐观锁    
     private Long version;
 
-    // 课程状态 1（true）已发布， 0（false）未发布
+    // 课程状态 1（true）已发布， 0（false）未发布     
     private Boolean status;
 
     // 逻辑删除 1（true）已删除， 0（false）未删除    
@@ -73,12 +76,20 @@ public class EduCourse extends Model<EduCourse> implements Serializable {
         this.teacherId = teacherId;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public String getCategoryFirstId() {
+        return categoryFirstId;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryFirstId(String categoryFirstId) {
+        this.categoryFirstId = categoryFirstId;
+    }
+
+    public String getCategorySecondId() {
+        return categorySecondId;
+    }
+
+    public void setCategorySecondId(String categorySecondId) {
+        this.categorySecondId = categorySecondId;
     }
 
     public String getTitle() {

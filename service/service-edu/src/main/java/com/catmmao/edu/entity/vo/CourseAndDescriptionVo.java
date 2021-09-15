@@ -7,11 +7,14 @@ public class CourseAndDescriptionVo {
     // 课程讲师ID
     private String teacherId;
 
-    // 课程分类ID
-    private String categoryId;
-
     // 课程标题
     private String title;
+
+    // 一级分类id
+    private String categoryFirstId;
+
+    // 二级分类id
+    private String categorySecondId;
 
     // 课程销售价格，设置为0则可免费观看
     private Double price;
@@ -42,14 +45,6 @@ public class CourseAndDescriptionVo {
 
     public void setTeacherId(String teacherId) {
         this.teacherId = teacherId;
-    }
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
     }
 
     public String getTitle() {
@@ -98,5 +93,21 @@ public class CourseAndDescriptionVo {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public String getCategoryFirstId() {
+        return categoryFirstId;
+    }
+
+    public void setCategoryFirstId(String categoryFirstId) {
+        this.categoryFirstId = categoryFirstId;
+    }
+
+    public String getCategorySecondId() {
+        return categorySecondId;
+    }
+
+    public void setCategorySecondId(String categorySecondId) {
+        this.categorySecondId = categorySecondId;
     }
 }
