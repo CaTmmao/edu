@@ -16,6 +16,36 @@ public class PageCourseRequestBody {
     private String end;
     // 讲师ID
     private String teacherId;
+    // 一级分类ID
+    private String categoryFirstId;
+    // 二级分类ID
+    private String categorySecondId;
+    // 根据价格/最新时间/销量排序（值可以为 'price' / 'create_time' / 'buy_count'）
+    private String sortField;
+
+    public String getCategoryFirstId() {
+        return categoryFirstId;
+    }
+
+    public void setCategoryFirstId(String categoryFirstId) {
+        this.categoryFirstId = categoryFirstId;
+    }
+
+    public String getCategorySecondId() {
+        return categorySecondId;
+    }
+
+    public void setCategorySecondId(String categorySecondId) {
+        this.categorySecondId = categorySecondId;
+    }
+
+    public String getSortField() {
+        return sortField;
+    }
+
+    public void setSortField(String sortField) {
+        this.sortField = sortField;
+    }
 
     public String getTitle() {
         return title;

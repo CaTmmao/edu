@@ -89,6 +89,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Override
     public PageResponse<List<EduCourse>> pageCourseCondition(Integer pageNum, Integer pageSize,
                                                              PageCourseRequestBody condition) {
+
         Page<EduCourse> pageCourse = new Page<>(pageNum, pageSize);
 
         if (condition != null) {
@@ -97,6 +98,9 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             String teacherId = condition.getTeacherId();
             String begin = condition.getBegin();
             String end = condition.getEnd();
+            String categoryFirstId = condition.getCategoryFirstId();
+            String categorySecondId = condition.getCategorySecondId();
+            String sortField = condition.getSortField();
 
             QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
             if (!Strings.isEmpty(title)) {
@@ -116,6 +120,20 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
             if (!Strings.isEmpty(teacherId)) {
                 wrapper.eq("teacher_id", teacherId);
+            }
+
+            if (!Strings.isEmpty(categoryFirstId)) {
+                wrapper.eq("category_first_id", categoryFirstId);
+            }
+
+            if (!Strings.isEmpty(categorySecondId)) {
+                wrapper.eq("category_second_id", categorySecondId);
+            }
+
+            if (!Strings.isEmpty(sortField)) {
+                if (sortField.equals("price") || sortField.equals("create_time") || sortField.equals("buy_count")) {
+                    wrapper.orderByDesc(sortField, sortField);
+                }
             }
 
             this.page(pageCourse, wrapper);
