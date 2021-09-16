@@ -7,6 +7,7 @@ import javax.websocket.server.PathParam;
 import com.catmmao.edu.entity.EduCourse;
 import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;
+import com.catmmao.edu.entity.vo.CourseDetailVo;
 import com.catmmao.edu.entity.vo.PageCourseRequestBody;
 import com.catmmao.edu.service.EduCourseService;
 import com.catmmao.utils.data.response.CommonResponse;
@@ -137,5 +138,21 @@ public class EduCourseController {
         return ResponseEntity.ok(CommonResponse.ok(data));
     }
 
+    /**
+     * 获取课程详情信息
+     *
+     * @param id 课程ID
+     * @return 课程详情
+     */
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<CommonResponse<CourseDetailVo>> getCourseDetail(@PathVariable String id) {
+
+        if (Strings.isEmpty(id)) {
+            throw HttpException.badRequest("请传入课程ID");
+        }
+
+        CourseDetailVo data = eduCourseService.getCourseDetail(id);
+        return ResponseEntity.ok(CommonResponse.ok(data));
+    }
 }
 

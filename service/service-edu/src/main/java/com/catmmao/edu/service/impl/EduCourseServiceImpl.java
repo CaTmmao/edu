@@ -17,6 +17,7 @@ import com.catmmao.edu.entity.EduCourseDescription;
 import com.catmmao.edu.entity.EduVideo;
 import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;
+import com.catmmao.edu.entity.vo.CourseDetailVo;
 import com.catmmao.edu.entity.vo.PageCourseRequestBody;
 import com.catmmao.edu.service.EduChapterService;
 import com.catmmao.edu.service.EduCourseDescriptionService;
@@ -41,22 +42,18 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Resource
     EduCourseDescriptionService courseDescriptionService;
-
     @Resource
     EduChapterMapper eduChapterMapper;
-
     @Resource
     EduChapterService chapterService;
-
     @Resource
     EduVideoService videoService;
-
     @Resource
     EduVideoMapper eduVideoMapper;
-
     @Resource
     EduCourseDescriptionService eduCourseDescriptionService;
-
+    @Resource
+    private EduCourseMapper eduCourseMapper;
     @Resource
     private VodClient vodClient;
 
@@ -222,6 +219,22 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
         wrapper.eq("teacher_id", teacherId);
         return list(wrapper);
+    }
+
+    @Transactional
+    @Override
+    public CourseDetailVo getCourseDetail(String id) {
+
+        CourseDetailVo result;
+
+        try {
+            result = eduCourseMapper.getCourseDetail(id);
+            result.setChapterList(chapterService.getChapterListWithVideoListByCourseId(id));
+        } catch (Exception e) {
+            throw HttpException.databaseError("获取课程信息失败");
+        }
+
+        return result;
     }
 
     /**

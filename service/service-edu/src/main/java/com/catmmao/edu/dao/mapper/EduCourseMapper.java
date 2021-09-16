@@ -2,6 +2,7 @@ package com.catmmao.edu.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.catmmao.edu.entity.EduCourse;
+import com.catmmao.edu.entity.vo.CourseDetailVo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -13,5 +14,12 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
 
+    /**
+     * 根据课程ID获取课程详情
+     *
+     * @param id 课程ID
+     * @return 课程详情信息
+     */
+    CourseDetailVo getCourseDetail(String id);
 }
 

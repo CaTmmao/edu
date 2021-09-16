@@ -22,6 +22,8 @@ mybatis-plus:
   configuration:
     # 打印 mybatis-plus 执行的 sql 语句
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:**/mapper/*.xml
+  type-aliases-package: com.catmmao.edu.entity
 
 server:
   port: 7000

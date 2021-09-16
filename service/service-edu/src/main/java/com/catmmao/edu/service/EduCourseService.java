@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.catmmao.edu.entity.EduCourse;
 import com.catmmao.edu.entity.vo.CourseAndDescriptionVo;
 import com.catmmao.edu.entity.vo.CourseCompleteInfoVo;
+import com.catmmao.edu.entity.vo.CourseDetailVo;
 import com.catmmao.edu.entity.vo.PageCourseRequestBody;
 import com.catmmao.utils.data.response.PageResponse;
 import org.springframework.stereotype.Service;
@@ -72,5 +73,13 @@ public interface EduCourseService extends IService<EduCourse> {
      * @return 课程列表
      */
     List<EduCourse> getCourseListByTeacherId(String teacherId);
+
+    /**
+     * 获取课程详情信息
+     *
+     * @param id 课程ID
+     * @return 课程详情
+     */
+    CourseDetailVo getCourseDetail(String id);
 }
 
