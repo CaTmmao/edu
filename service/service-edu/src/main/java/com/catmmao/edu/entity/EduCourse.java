@@ -1,5 +1,6 @@
 package com.catmmao.edu.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -31,7 +32,7 @@ public class EduCourse extends Model<EduCourse> implements Serializable {
     private String title;
 
     // 课程销售价格，设置为0则可免费观看    
-    private Double price;
+    private BigDecimal price;
 
     // 总课时    
     private Integer lessonNum;
@@ -100,11 +101,11 @@ public class EduCourse extends Model<EduCourse> implements Serializable {
         this.title = title;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
