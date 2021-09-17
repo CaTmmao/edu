@@ -17,4 +17,12 @@ public interface VodService {
      * @param id 阿里云生成的视频ID
      */
     void deleteVideo(String id);
+
+    /**
+     * 获取视频凭证
+     *
+     * @param id 阿里云生成的视频ID
+     * @return 视频凭证
+     */
+    String getVideoPlayAuth(String id);
 }

@@ -8,6 +8,8 @@ import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.catmmao.edu.common.Constant;
 import com.catmmao.edu.common.VodUtils;
 import com.catmmao.edu.service.VodService;
@@ -70,10 +72,25 @@ public class VodServiceImpl implements VodService {
 
             // 视频不存在
             if (errorCodeAndMessage.contains("InvalidVideo.NotFound")) {
-                throw HttpException.resourceNotFound("不存在vodId为" +vodId + "的视频，删除失败");
+                throw HttpException.resourceNotFound("不存在vodId为" + vodId + "的视频，删除失败");
             } else if (errorCodeAndMessage.contains("DeleteVideoFailed")) {
                 throw new HttpException("删除视频失败，请稍后重试。", HttpStatus.INTERNAL_SERVER_ERROR);
             }
+        }
+    }
+
+    @Override
+    public String getVideoPlayAuth(String id) {
+
+        try {
+            DefaultAcsClient client = VodUtils.initVodClient(Constant.ACCESSKEYID, Constant.ACCESSKEYSECRET);
+            GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+            request.setVideoId(id);
+            GetVideoPlayAuthResponse response = client.getAcsResponse(request);
+            return response.getPlayAuth();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new HttpException("视频凭证获取失败", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
