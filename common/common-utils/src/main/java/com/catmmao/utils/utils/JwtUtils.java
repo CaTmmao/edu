@@ -1,12 +1,14 @@
-package com.catmmao.edu.utils;
+package com.catmmao.utils.utils;
 
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
+import com.catmmao.utils.exception.HttpException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.logging.log4j.util.Strings;
 
 // JWT 配置
 public class JwtUtils {
@@ -92,5 +94,22 @@ public class JwtUtils {
         // 获取主体信息
         Claims claims = claimsJws.getBody();
         return (String) claims.get("id");
+    }
+
+    /**
+     * 根据 httpServletRequest 获取用户ID
+     *
+     * @param request 请求对象
+     * @return 用户ID
+     */
+    public static String getUserIdByHttpRequest(HttpServletRequest request) {
+
+        String token = request.getHeader("token");
+
+        if (Strings.isEmpty(token)) {
+            throw HttpException.badRequest("未登录");
+        }
+
+        return getUserIdByToken(token);
     }
 }

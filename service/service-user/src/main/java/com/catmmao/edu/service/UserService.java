@@ -36,5 +36,13 @@ public interface UserService extends IService<User> {
      * @return 用户信息
      */
     User getUserInfo(String token);
+
+    /**
+     * 获取用户信息
+     *
+     * @param id 用户ID
+     * @return 用户信息
+     */
+    User getUserInfoById(String id);
 }
 

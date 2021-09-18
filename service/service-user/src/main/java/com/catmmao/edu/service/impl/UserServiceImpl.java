@@ -9,8 +9,8 @@ import com.catmmao.edu.dao.mapper.UserMapper;
 import com.catmmao.edu.entity.User;
 import com.catmmao.edu.entity.vo.SignUpVo;
 import com.catmmao.edu.service.UserService;
-import com.catmmao.edu.utils.JwtUtils;
 import com.catmmao.utils.exception.HttpException;
+import com.catmmao.utils.utils.JwtUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -82,7 +82,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public User getUserInfo(String token) {
 
         String userId = JwtUtils.getUserIdByToken(token);
-        User user = getById(userId);
+        return getUserInfoById(userId);
+    }
+
+    @Override
+    public User getUserInfoById(String id) {
+
+        User user = getById(id);
 
         if (user == null) {
             throw HttpException.resourceNotFound("找不到该用户");

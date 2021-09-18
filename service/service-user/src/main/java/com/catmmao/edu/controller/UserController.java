@@ -7,11 +7,14 @@ import com.catmmao.edu.entity.User;
 import com.catmmao.edu.entity.vo.SignUpVo;
 import com.catmmao.edu.service.UserService;
 import com.catmmao.utils.data.response.CommonResponse;
+import com.catmmao.utils.dto.UserDTO;
 import com.catmmao.utils.exception.HttpException;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,6 +84,25 @@ public class UserController {
         }
 
         User data = userService.getUserInfo(token);
+        return ResponseEntity.ok(CommonResponse.ok(data));
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param id 用户ID
+     * @return 用户信息
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<CommonResponse<UserDTO>> getUserInfoById(@PathVariable String id) {
+
+        if (Strings.isEmpty(id)) {
+            throw HttpException.forbidden("请传入参数");
+        }
+
+        User user = userService.getUserInfoById(id);
+        UserDTO data = new UserDTO();
+        BeanUtils.copyProperties(user, data);
         return ResponseEntity.ok(CommonResponse.ok(data));
     }
 }
