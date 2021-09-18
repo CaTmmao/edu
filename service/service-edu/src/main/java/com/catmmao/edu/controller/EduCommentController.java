@@ -1,8 +1,10 @@
 package com.catmmao.edu.controller;
 
+import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.catmmao.edu.entity.EduComment;
 import com.catmmao.edu.entity.vo.CommentVo;
 import com.catmmao.edu.service.EduCommentService;
 import com.catmmao.utils.data.response.CommonResponse;
@@ -11,6 +13,8 @@ import com.catmmao.utils.utils.JwtUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +57,23 @@ public class EduCommentController {
 
         eduCommentService.addComment(comment);
         return ResponseEntity.ok(CommonResponse.ok(true));
+    }
+
+    /**
+     * 获取评论列表
+     *
+     * @param courseId 课程ID
+     * @return 评论列表
+     */
+    @GetMapping("/{courseId}")
+    public ResponseEntity<CommonResponse<List<EduComment>>> getCommentList(@PathVariable String courseId) {
+
+        if (Strings.isEmpty(courseId)) {
+            throw HttpException.badRequest("参数不完整");
+        }
+
+        List<EduComment> data = eduCommentService.getCommentList(courseId);
+        return ResponseEntity.ok(CommonResponse.ok(data));
     }
 }
 

@@ -1,7 +1,9 @@
 package com.catmmao.edu.service.impl;
 
+import java.util.List;
 import javax.annotation.Resource;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.catmmao.edu.client.UserClient;
 import com.catmmao.edu.dao.mapper.EduCommentMapper;
@@ -39,6 +41,14 @@ public class EduCommentServiceImpl extends ServiceImpl<EduCommentMapper, EduComm
         if (!save(eduComment)) {
             throw HttpException.databaseError("评论添加失败");
         }
+    }
+
+    @Override
+    public List<EduComment> getCommentList(String courseId) {
+
+        QueryWrapper<EduComment> wrapper = new QueryWrapper<>();
+        wrapper.eq("course_id", courseId);
+        return list(wrapper);
     }
 }
 
