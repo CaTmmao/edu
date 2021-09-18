@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author catmmao
  * @since 2021/9/4 下午5:42
  */
-@FeignClient(value = "edu-vod", fallback = VodClientDegrade.class)
+@FeignClient(value = "service-vod", fallback = VodClientDegrade.class)
 public interface VodClient {
 
     /**
