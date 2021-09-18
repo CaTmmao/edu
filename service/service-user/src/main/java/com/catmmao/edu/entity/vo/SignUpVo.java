@@ -16,7 +16,7 @@ public class SignUpVo {
     private String password;
 
     // 昵称
-    private String nickName;
+    private String nickname;
 
     public String getEmail() {
         return email;
@@ -42,11 +42,11 @@ public class SignUpVo {
         this.password = password;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }
