@@ -25,7 +25,7 @@
                  left join edu_teacher teacher on course.teacher_id = teacher.id
                  left join edu_category category1 on course.category_first_id = category1.id
                  left join edu_category category2 on course.category_second_id = category2.id
-        where course.id = 14
+        where course.id = #{id}
           and course.is_deleted = 0
     </select>
 </mapper>
