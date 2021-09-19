@@ -68,6 +68,19 @@ public class EduOrderServiceImpl extends ServiceImpl<EduOrderMapper, EduOrder> i
         return orderNo;
     }
 
+    @Override
+    public EduOrder getOrderByOrderNo(String orderNo) {
+
+        QueryWrapper<EduOrder> wrapper = new QueryWrapper<>();
+        wrapper.eq("order_no", orderNo);
+        EduOrder result = getOne(wrapper);
+        if (result == null) {
+            throw HttpException.resourceNotFound("没有该订单");
+        }
+
+        return result;
+    }
+
     /**
      * 检查用户是否已经创建了订单
      *

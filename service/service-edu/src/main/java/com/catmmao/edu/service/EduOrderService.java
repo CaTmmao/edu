@@ -21,5 +21,13 @@ public interface EduOrderService extends IService<EduOrder> {
      * @return 订单号
      */
     String createOrder(String courseId, String userId);
+
+    /**
+     * 获取订单信息
+     *
+     * @param orderNo 订单号
+     * @return 订单信息
+     */
+    EduOrder getOrderByOrderNo(String orderNo);
 }
 

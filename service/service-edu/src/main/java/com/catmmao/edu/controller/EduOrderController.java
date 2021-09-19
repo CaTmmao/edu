@@ -3,12 +3,15 @@ package com.catmmao.edu.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.catmmao.edu.entity.EduOrder;
 import com.catmmao.edu.service.EduOrderService;
 import com.catmmao.utils.data.response.CommonResponse;
 import com.catmmao.utils.utils.JwtUtils;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,5 +46,19 @@ public class EduOrderController {
         String data = eduOrderService.createOrder(courseId, userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(CommonResponse.ok(data));
     }
+
+    /**
+     * 获取订单信息
+     *
+     * @param orderNo 订单号
+     * @return 订单信息
+     */
+    @GetMapping("/{orderNo}")
+    public ResponseEntity<CommonResponse<EduOrder>> getOrderByOrderNo(@PathVariable String orderNo) {
+
+        EduOrder data = eduOrderService.getOrderByOrderNo(orderNo);
+        return ResponseEntity.ok(CommonResponse.ok(data));
+    }
+
 }
 
