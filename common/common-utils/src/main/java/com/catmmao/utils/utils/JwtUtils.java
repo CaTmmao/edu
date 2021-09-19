@@ -35,7 +35,7 @@ public class JwtUtils {
                 // 设置过期时间
                 .setSubject("edu-user")
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
+                //.setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
 
                 // 设置 token 主体部分（可存储用户信息）
                 .claim("id", id)
