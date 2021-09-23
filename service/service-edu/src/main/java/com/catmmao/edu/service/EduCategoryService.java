@@ -32,5 +32,12 @@ public interface EduCategoryService extends IService<EduCategory> {
      * @param category 分类信息
      */
     void createCategory(EduCategory category);
+
+    /**
+     * 删除分类
+     *
+     * @param id 分类ID
+     */
+    void deleteCategory(String id);
 }
 

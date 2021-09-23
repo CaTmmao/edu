@@ -12,6 +12,7 @@ import com.catmmao.edu.service.EduCategoryService;
 import com.catmmao.utils.exception.HttpException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 课程分类(EduCategory)表服务实现类
@@ -60,6 +61,18 @@ public class EduCategoryServiceImpl extends ServiceImpl<EduCategoryMapper, EduCa
 
         if (!save(category)) {
             throw HttpException.databaseError("添加失败");
+        }
+    }
+
+    @Transactional
+    @Override
+    public void deleteCategory(String id) {
+
+        QueryWrapper<EduCategory> wrapper = new QueryWrapper<>();
+        wrapper.eq("id", id);
+        wrapper.last("or parent_id = " + id);
+        if (!remove(wrapper)) {
+            throw HttpException.databaseError("删除失败");
         }
     }
 

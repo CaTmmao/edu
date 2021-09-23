@@ -9,6 +9,7 @@ import com.catmmao.edu.service.EduCategoryService;
 import com.catmmao.utils.data.response.CommonResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,6 +63,18 @@ public class EduCategoryController {
     @PostMapping
     public ResponseEntity<CommonResponse<?>> createCategory(@RequestBody EduCategory category) {
         eduCategoryService.createCategory(category);
+        return ResponseEntity.ok(CommonResponse.ok(true));
+    }
+
+    /**
+     * 删除分类
+     *
+     * @param id 分类ID
+     * @return 是否删除成功
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CommonResponse<Boolean>> deleteCategory(@PathVariable String id) {
+        eduCategoryService.deleteCategory(id);
         return ResponseEntity.ok(CommonResponse.ok(true));
     }
 }
