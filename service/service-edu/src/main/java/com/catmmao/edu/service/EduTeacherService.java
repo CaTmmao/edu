@@ -21,5 +21,12 @@ public interface EduTeacherService extends IService<EduTeacher> {
      * @return 热门老师列表
      */
     List<EduTeacher> getHotTeacherList();
+
+    /**
+     * 创建讲师
+     *
+     * @param eduTeacher 讲师信息
+     */
+    void createTeacher(EduTeacher eduTeacher);
 }
 

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.catmmao.edu.dao.mapper.EduTeacherMapper;
 import com.catmmao.edu.entity.EduTeacher;
 import com.catmmao.edu.service.EduTeacherService;
+import com.catmmao.utils.exception.HttpException;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,14 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         wrapper.orderByAsc("id");
         wrapper.last("limit 4");
         return list(wrapper);
+    }
+
+    @Override
+    public void createTeacher(EduTeacher eduTeacher) {
+
+        if (!save(eduTeacher)) {
+            throw HttpException.databaseError("创建失败");
+        }
     }
 }
 

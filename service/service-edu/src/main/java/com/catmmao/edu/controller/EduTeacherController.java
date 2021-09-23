@@ -69,10 +69,9 @@ public class EduTeacherController {
      */
     @PostMapping
     public ResponseEntity<CommonResponse<?>> createTeacher(@RequestBody EduTeacher eduTeacher) {
-        boolean isSuccess = eduTeacherService.save(eduTeacher);
-        CommonResponse<?> responseBody = isSuccess ? CommonResponse.ok(null) : CommonResponse.error("创建失败");
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
+        eduTeacherService.createTeacher(eduTeacher);
+        return ResponseEntity.status(HttpStatus.CREATED).body(CommonResponse.ok(true));
     }
 
     @PatchMapping("/{id}")
