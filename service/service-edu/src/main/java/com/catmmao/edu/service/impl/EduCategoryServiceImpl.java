@@ -54,6 +54,7 @@ public class EduCategoryServiceImpl extends ServiceImpl<EduCategoryMapper, EduCa
 
         QueryWrapper<EduCategory> wrapper = new QueryWrapper<>();
         wrapper.eq("title", category.getTitle());
+        wrapper.eq("parent_id", category.getParentId());
         EduCategory categoryInDb = getOne(wrapper);
         if (categoryInDb != null) {
             throw HttpException.badRequest("已存在同样标题的分类");
