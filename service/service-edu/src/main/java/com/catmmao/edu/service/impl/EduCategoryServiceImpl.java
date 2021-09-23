@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.catmmao.edu.dao.mapper.EduCategoryMapper;
 import com.catmmao.edu.entity.EduCategory;
 import com.catmmao.edu.entity.vo.CategoryAndListOfSubcategoryVo;
-import com.catmmao.utils.exception.HttpException;
 import com.catmmao.edu.service.EduCategoryService;
+import com.catmmao.utils.exception.HttpException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +48,21 @@ public class EduCategoryServiceImpl extends ServiceImpl<EduCategoryMapper, EduCa
         return result;
     }
 
+    @Override
+    public void createCategory(EduCategory category) {
+
+        QueryWrapper<EduCategory> wrapper = new QueryWrapper<>();
+        wrapper.eq("title", category.getTitle());
+        EduCategory categoryInDb = getOne(wrapper);
+        if (categoryInDb != null) {
+            throw HttpException.badRequest("已存在同样标题的分类");
+        }
+
+        if (!save(category)) {
+            throw HttpException.databaseError("添加失败");
+        }
+    }
+
     /**
      * 根据父级分类ID获取子分类列表
      *
@@ -57,13 +72,8 @@ public class EduCategoryServiceImpl extends ServiceImpl<EduCategoryMapper, EduCa
     private List<EduCategory> getCategoryListByParentId(String parentId) {
         QueryWrapper<EduCategory> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("parent_id", parentId);
-        List<EduCategory> result = baseMapper.selectList(queryWrapper);
 
-        if (result.size() == 0) {
-            throw HttpException.resourceNotFound("找不到 parentId 为 " + parentId + " 的数据");
-        }
-
-        return result;
+        return baseMapper.selectList(queryWrapper);
     }
 
     /**

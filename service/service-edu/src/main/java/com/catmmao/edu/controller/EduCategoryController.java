@@ -3,14 +3,16 @@ package com.catmmao.edu.controller;
 import java.util.List;
 import javax.annotation.Resource;
 
-import com.catmmao.utils.data.response.CommonResponse;
-import com.catmmao.edu.entity.vo.CategoryAndListOfSubcategoryVo;
 import com.catmmao.edu.entity.EduCategory;
+import com.catmmao.edu.entity.vo.CategoryAndListOfSubcategoryVo;
 import com.catmmao.edu.service.EduCategoryService;
+import com.catmmao.utils.data.response.CommonResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,6 +51,18 @@ public class EduCategoryController {
     public ResponseEntity<CommonResponse<EduCategory>> getCategoryById(@PathVariable String id) {
         EduCategory data = eduCategoryService.getCategoryById(id);
         return ResponseEntity.ok(CommonResponse.ok(data));
+    }
+
+    /**
+     * 添加分类
+     *
+     * @param category 分类信息
+     * @return 是否添加成功
+     */
+    @PostMapping
+    public ResponseEntity<CommonResponse<?>> createCategory(@RequestBody EduCategory category) {
+        eduCategoryService.createCategory(category);
+        return ResponseEntity.ok(CommonResponse.ok(true));
     }
 }
 

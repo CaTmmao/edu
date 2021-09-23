@@ -25,5 +25,12 @@ public interface EduCategoryService extends IService<EduCategory> {
      * @return 分类信息
      */
     EduCategory getCategoryById(String id);
+
+    /**
+     * 添加分类
+     *
+     * @param category 分类信息
+     */
+    void createCategory(EduCategory category);
 }
 
