@@ -39,5 +39,12 @@ public interface EduCategoryService extends IService<EduCategory> {
      * @param id 分类ID
      */
     void deleteCategory(String id);
+
+    /**
+     * 更新分类
+     *
+     * @param category 分类信息
+     */
+    void updateCategory(EduCategory category);
 }
 

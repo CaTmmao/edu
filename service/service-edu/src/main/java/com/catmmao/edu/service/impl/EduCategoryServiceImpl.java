@@ -76,6 +76,19 @@ public class EduCategoryServiceImpl extends ServiceImpl<EduCategoryMapper, EduCa
         }
     }
 
+    @Override
+    public void updateCategory(EduCategory category) {
+
+        EduCategory categoryInDb = getById(category.getId());
+        if (categoryInDb == null) {
+            throw HttpException.resourceNotFound("找不到该分类");
+        }
+
+        if (!updateById(category)) {
+            throw HttpException.databaseError("更新失败");
+        }
+    }
+
     /**
      * 根据父级分类ID获取子分类列表
      *
