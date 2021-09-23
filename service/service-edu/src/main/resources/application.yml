@@ -26,4 +26,4 @@ mybatis-plus:
   type-aliases-package: com.catmmao.edu.entity
 
 server:
-  port: 7000
+  port: 9004
