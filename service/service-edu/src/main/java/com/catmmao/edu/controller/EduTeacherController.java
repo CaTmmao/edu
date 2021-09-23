@@ -2,16 +2,13 @@ package com.catmmao.edu.controller;
 
 
 import java.util.List;
-import java.util.Optional;
 import javax.annotation.Resource;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catmmao.edu.entity.EduTeacher;
+import com.catmmao.edu.entity.vo.PageTeacherConditionVo;
 import com.catmmao.edu.service.EduTeacherService;
 import com.catmmao.utils.data.response.CommonResponse;
 import com.catmmao.utils.data.response.PageResponse;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -74,14 +71,20 @@ public class EduTeacherController {
         return ResponseEntity.status(HttpStatus.CREATED).body(CommonResponse.ok(true));
     }
 
+    /**
+     * 更新讲师
+     *
+     * @param id         讲师ID
+     * @param eduTeacher 讲师信息
+     * @return 是否更新成功
+     */
     @PatchMapping("/{id}")
-    public ResponseEntity<CommonResponse<?>> updateTeacher(@PathVariable String id,
-                                                           @RequestBody EduTeacher eduTeacher) {
-        eduTeacher.setId(id);
-        boolean isSuccess = eduTeacherService.updateById(eduTeacher);
+    public ResponseEntity<CommonResponse<Boolean>> updateTeacher(@PathVariable String id,
+                                                                 @RequestBody EduTeacher eduTeacher) {
 
-        CommonResponse<?> responseBody = isSuccess ? CommonResponse.ok(null) : CommonResponse.error("更新失败");
-        return ResponseEntity.ok(responseBody);
+        eduTeacher.setId(id);
+        eduTeacherService.updateTeacher(eduTeacher);
+        return ResponseEntity.ok(CommonResponse.ok(true));
     }
 
     /**
@@ -92,9 +95,9 @@ public class EduTeacherController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<CommonResponse<EduTeacher>> getTeacher(@PathVariable String id) {
-        EduTeacher teacher = eduTeacherService.getById(id);
-        CommonResponse<EduTeacher> responseBody = CommonResponse.ok(teacher);
-        return ResponseEntity.ok(responseBody);
+
+        EduTeacher data = eduTeacherService.getTeacherById(id);
+        return ResponseEntity.ok(CommonResponse.ok(data));
     }
 
     /**
@@ -105,101 +108,26 @@ public class EduTeacherController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<CommonResponse<Boolean>> deleteTeacher(@PathVariable String id) {
-        return ResponseEntity.of(Optional.of(CommonResponse.ok(eduTeacherService.removeById(id))));
+
+        eduTeacherService.deleteTeacherById(id);
+        return ResponseEntity.ok(CommonResponse.ok(true));
     }
 
     /**
      * 获取所有讲师(可筛选条件的分页查询)
      *
-     * @param pageNum                当前第几页
-     * @param pageSize               每页显示的数量
-     * @param pageTeacherRequestBody 筛选条件
+     * @param pageNum   当前第几页
+     * @param pageSize  每页显示的数量
+     * @param condition 筛选条件
      * @return 讲师列表
      */
     @PostMapping("teachers/condition")
     public ResponseEntity<PageResponse<List<EduTeacher>>> pageTeacherCondition(@RequestParam Integer pageNum,
                                                                                @RequestParam Integer pageSize,
                                                                                @RequestBody(required = false)
-                                                                                       PageTeacherConditionRequestBody pageTeacherRequestBody) {
-        Page<EduTeacher> pageTeacher = new Page<>(pageNum, pageSize);
-
-        if (pageTeacherRequestBody != null) {
-            String name = pageTeacherRequestBody.getName();
-            String begin = pageTeacherRequestBody.getBegin();
-            String end = pageTeacherRequestBody.getEnd();
-            Integer level = pageTeacherRequestBody.getLevel();
-
-            QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
-            if (!Strings.isEmpty(name)) {
-                wrapper.like("name", name);
-            }
-            if (!Strings.isEmpty(begin)) {
-                wrapper.ge("create_time", begin);
-            }
-            if (!Strings.isEmpty(end)) {
-                wrapper.le("create_time", end);
-            }
-            if (level != null) {
-                wrapper.eq("level", level);
-            }
-
-            eduTeacherService.page(pageTeacher, wrapper);
-        } else {
-            eduTeacherService.page(pageTeacher);
-        }
-
-        pageSize = (int) pageTeacher.getSize();
-        pageNum = (int) pageTeacher.getCurrent();
-        Integer total = (int) pageTeacher.getTotal();
-        Integer totalPage = total % pageSize == 0 ? total / pageSize : total / pageSize + 1;
-
+                                                                                       PageTeacherConditionVo condition) {
         PageResponse<List<EduTeacher>> responseBody =
-                PageResponse.pageOk(pageSize, pageNum, total, totalPage, pageTeacher.getRecords());
-
+                eduTeacherService.pageTeacherCondition(pageNum, pageSize, condition);
         return ResponseEntity.ok(responseBody);
-    }
-
-    // 可筛选条件的分页查询接口的请求体对象
-    static class PageTeacherConditionRequestBody {
-        // 讲师被创建的开始时间
-        private String begin;
-        // 讲师被创建的结束时间
-        private String end;
-        // 讲师名字
-        private String name;
-        // 讲师头衔
-        private Integer level;
-
-        public String getBegin() {
-            return begin;
-        }
-
-        public void setBegin(String begin) {
-            this.begin = begin;
-        }
-
-        public String getEnd() {
-            return end;
-        }
-
-        public void setEnd(String end) {
-            this.end = end;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Integer getLevel() {
-            return level;
-        }
-
-        public void setLevel(Integer level) {
-            this.level = level;
-        }
     }
 }
