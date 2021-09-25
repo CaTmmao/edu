@@ -91,6 +91,7 @@ sudo docker start nacos
 
 ### 2.启动服务
 该项目使用微服务的形式，将整个后端应用拆分为5个服务，每个服务单独运行（可在 idea 编辑器中打开各服务的入口文件并运行）
+<br>
 <img src="https://github.com/CaTmmao/edu-backend/blob/master/images/service.png" width="300"/>
 
 - oss<br>
