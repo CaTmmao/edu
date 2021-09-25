@@ -1,12 +1,39 @@
 ## 项目介绍
 
-在线教育全栈项目（前后端分离），使用 SpringBoot + Spring Cloud Alibaba 进行微服务架构，一共有三个代码仓库
+在线教育全栈项目（前后端分离），使用 Spring Boot + Spring Cloud Alibaba 进行微服务架构，一共有三个代码仓库
 - 前台页面（前端）
 - [后台管理系统（前端）](https://github.com/CaTmmao/edu-front-admin)
 - 后端（也就是该仓库）
+<br>
+
+#### maven模块说明
+```
+├─ common 公共模块
+│    ├─ common-database 数据库相关依赖
+│    ├─ common-utils 公共类
+└─ service
+       ├─ service-edu  该项目其余接口
+       ├─ service-oss  阿里云对象存储oss服务
+       ├─ service-sms  邮箱验证码发送服务
+       ├─ service-user 用户登录注册服务
+       └─ service-vod  阿里云视频点播服务
+```
 
 <br>
- 
+
+#### 使用技术栈
+|    框架    |       使用内容          |          官网                  |       备注        |  版本  |
+| :-----------: | :----------------------: | :------------------: | :----------: | :----: |
+|         java          |             |      https://docs.oracle.com/javase/8/index.html      |             |  8   |
+|       Nacos   |  服务注册、发现     |     https://nacos.io/zh-cn/index.html         |           | 2.0.3  |
+|       OpenFeign  |   负责微服务之间的调用    |    https://spring.io/projects/spring-cloud-openfeign       |    |   |
+|         MySQL         |        数据库       |         https://www.mysql.com/       |  | 8.0.22 |
+|         Redis         | 搭配 spring-boot-starter-cache 将数据缓存到redis中  |       https://redis.io/       |  | 6.2.1  |
+|      Spring Boot      |        Spring快速开发的脚手架  |     https://spring.io/projects/spring-boot/    |           |   2.4.8     |
+|     Mybatis-Plus      |           简化Mybatis开发           |         https://mp.baomidou.com/        |  |      3.4.3  |
+|         flyway     |      数据库数据迁移  |       https://flywaydb.org/documentation/             |            |   7.11.3   |
+<br>
+
 ## 本地运行
 ### 1.用 docker 运行需要依赖的应用
 |  容器        | 宿主端口: 容器内部端口 |  版本  |    用户名: 密码    |
