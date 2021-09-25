@@ -26,7 +26,7 @@
 | :-----------: | :----------------------: | :------------------: | :----------: | :----: |
 |         java          |             |      https://docs.oracle.com/javase/8/index.html      |             |  8   |
 |       Nacos   |  服务注册、发现     |     https://nacos.io/zh-cn/index.html         |           | 2.0.3  |
-|       OpenFeign  |   负责微服务之间的调用    |    https://spring.io/projects/spring-cloud-openfeign       |    |   |
+|       OpenFeign  |   负责微服务之间的调用    |    https://spring.io/projects/spring-cloud-openfeign       |    |  3.0.3 |
 |         MySQL         |        数据库       |         https://www.mysql.com/       |  | 8.0.22 |
 |         Redis         | 搭配 spring-boot-starter-cache 将数据缓存到redis中  |       https://redis.io/       |  | 6.2.1  |
 |      Spring Boot      |        Spring快速开发的脚手架  |     https://spring.io/projects/spring-boot/    |           |   2.4.8     |
