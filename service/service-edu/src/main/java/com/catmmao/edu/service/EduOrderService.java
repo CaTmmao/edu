@@ -29,5 +29,12 @@ public interface EduOrderService extends IService<EduOrder> {
      * @return 订单信息
      */
     EduOrder getOrderByOrderNo(String orderNo);
+
+    /**
+     * 更新订单为支付成功状态
+     *
+     * @param orderNo 订单ID
+     */
+    void updateOrderPaySuccessByOrderNo(String orderNo);
 }
 

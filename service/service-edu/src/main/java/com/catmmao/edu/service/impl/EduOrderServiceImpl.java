@@ -81,6 +81,22 @@ public class EduOrderServiceImpl extends ServiceImpl<EduOrderMapper, EduOrder> i
         return result;
     }
 
+    @Override
+    public void updateOrderPaySuccessByOrderNo(String orderNo) {
+
+        QueryWrapper<EduOrder> wrapper = new QueryWrapper<>();
+        wrapper.eq("order_no", orderNo);
+        EduOrder orderInDb = getOne(wrapper);
+        if (orderInDb == null) {
+            throw HttpException.resourceNotFound("不存在该订单");
+        }
+
+        orderInDb.setStatus(true);
+        if (!updateById(orderInDb)) {
+            throw HttpException.databaseError("更新失败");
+        }
+    }
+
     /**
      * 检查用户是否已经创建了订单
      *

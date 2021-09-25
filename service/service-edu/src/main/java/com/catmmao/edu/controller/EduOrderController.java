@@ -7,11 +7,11 @@ import com.catmmao.edu.entity.EduOrder;
 import com.catmmao.edu.service.EduOrderService;
 import com.catmmao.utils.data.response.CommonResponse;
 import com.catmmao.utils.utils.JwtUtils;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,5 +60,17 @@ public class EduOrderController {
         return ResponseEntity.ok(CommonResponse.ok(data));
     }
 
+    /**
+     * 更新订单为支付成功状态
+     *
+     * @param orderNo 订单ID
+     * @return 是否更新成功
+     */
+    @PatchMapping("/{orderNo}")
+    public ResponseEntity<CommonResponse<Boolean>> updateOrderPaySuccessByOrderNo(@PathVariable String orderNo) {
+
+        eduOrderService.updateOrderPaySuccessByOrderNo(orderNo);
+        return ResponseEntity.ok(CommonResponse.ok(true));
+    }
 }
 
