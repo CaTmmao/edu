@@ -1,9 +1,9 @@
 ## 项目介绍
 
 在线教育全栈项目（前后端分离），使用 Spring Boot + Spring Cloud Alibaba 进行微服务架构，一共有三个代码仓库
-- [前台页面（前端）](https://github.com/CaTmmao/edu-front)
-- [后台管理系统（前端）](https://github.com/CaTmmao/edu-front-admin)
-- 后端（也就是该仓库）
+- [前台用户界面](https://github.com/CaTmmao/edu-front)
+- [后台管理界面](https://github.com/CaTmmao/edu-front-admin)
+- 后端应用（也就是该仓库）
 <br>
 
 #### maven模块说明
