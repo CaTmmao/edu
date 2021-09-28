@@ -1,5 +1,7 @@
 package com.catmmao.edu.entity.vo;
 
+import java.math.BigDecimal;
+
 public class CourseAndDescriptionVo {
     // 课程ID
     private String id;
@@ -17,7 +19,7 @@ public class CourseAndDescriptionVo {
     private String categorySecondId;
 
     // 课程销售价格，设置为0则可免费观看
-    private Double price;
+    private BigDecimal price;
 
     // 总课时
     private Integer lessonNum;
@@ -55,11 +57,11 @@ public class CourseAndDescriptionVo {
         this.title = title;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
