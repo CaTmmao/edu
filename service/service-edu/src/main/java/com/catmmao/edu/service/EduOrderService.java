@@ -36,5 +36,14 @@ public interface EduOrderService extends IService<EduOrder> {
      * @param orderNo 订单ID
      */
     void updateOrderPaySuccessByOrderNo(String orderNo);
+
+    /**
+     * 检查订单是否支付
+     *
+     * @param courseId 课程ID
+     * @param userId  用户ID
+     * @return 是否支付
+     */
+    boolean checkUserIfBuyCourse(String courseId, String userId);
 }
 

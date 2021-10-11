@@ -97,6 +97,20 @@ public class EduOrderServiceImpl extends ServiceImpl<EduOrderMapper, EduOrder> i
         }
     }
 
+    @Override
+    public boolean checkUserIfBuyCourse(String courseId, String userId) {
+
+        QueryWrapper<EduOrder> wrapper = new QueryWrapper<>();
+        wrapper.eq("course_id", courseId);
+        wrapper.eq("user_id", userId);
+        EduOrder orderInDb = getOne(wrapper);
+        if (orderInDb == null) {
+            return false;
+        }
+
+        return orderInDb.getStatus();
+    }
+
     /**
      * 检查用户是否已经创建了订单
      *

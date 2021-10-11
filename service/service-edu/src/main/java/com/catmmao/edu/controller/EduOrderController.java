@@ -72,5 +72,21 @@ public class EduOrderController {
         eduOrderService.updateOrderPaySuccessByOrderNo(orderNo);
         return ResponseEntity.ok(CommonResponse.ok(true));
     }
+
+    /**
+     * 检查订单是否支付
+     *
+     * @param courseId 课程ID
+     * @param request  请求
+     * @return 是否支付
+     */
+    @GetMapping("/course_status/{courseId}")
+    public ResponseEntity<CommonResponse<Boolean>> checkUserIfBuyCourse(@PathVariable String courseId,
+                                                                        HttpServletRequest request) {
+
+        String userId = JwtUtils.getUserIdByHttpRequest(request);
+        boolean ifPay = eduOrderService.checkUserIfBuyCourse(courseId, userId);
+        return ResponseEntity.ok(CommonResponse.ok(ifPay));
+    }
 }
 
