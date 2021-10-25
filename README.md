@@ -14,7 +14,6 @@
 └─ service
        ├─ service-edu  该项目其余接口
        ├─ service-oss  阿里云对象存储oss服务
-       ├─ service-sms  邮箱验证码发送服务
        ├─ service-user 用户登录注册服务
        └─ service-vod  阿里云视频点播服务
 ```
@@ -139,9 +138,6 @@ sudo docker start nacos
 - user<br>
   用户相关服务（用户注册和登录相关接口）<br>
   运行端口号：9002
-- sms<br>
-  邮件发送服务（注册时获取邮箱验证码等接口）<br>
-  端口号：9003
 - service<br>
   处理该项目其他的接口<br>
   端口号：9004
@@ -150,5 +146,5 @@ sudo docker start nacos
 
 ### 3.初始化mysql数据库中的数据
 ```bash
-mvn flyway:migrate -pl edu-service
+mvn flyway:migrate -pl service/service-edu
 ```
