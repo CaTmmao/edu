@@ -8,7 +8,7 @@
     `teacher_name` varchar(20)          DEFAULT NULL COMMENT '讲师名称',
     `user_id`      varchar(19) NOT NULL DEFAULT '' COMMENT '用户id',
     `nickname`     varchar(50)          DEFAULT NULL COMMENT '用户昵称',
-    `email`        varchar(11)          DEFAULT NULL COMMENT '用户邮箱',
+    `email`        varchar(30)          DEFAULT NULL COMMENT '用户邮箱',
     `total_fee`    decimal(10, 2)       DEFAULT '0.01' COMMENT '订单金额（分）',
     `pay_type`     tinyint(3)           DEFAULT NULL COMMENT '支付类型（1：微信 2：支付宝）',
     `status`       tinyint(3)           DEFAULT NULL COMMENT '订单状态（0：未支付 1：已支付）',

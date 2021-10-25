@@ -20,9 +20,9 @@ create table `crm_banner`
 
 insert into `crm_banner`
 values ('1194556896025845762', 'test1',
-        'https://guli-college-for-june.oss-cn-beijing.aliyuncs.com/banner/153525d0ef15459596.jpg', '/course', 1, 0,
+        'https://edu-site.oss-cn-beijing.aliyuncs.com/%E8%BD%AE%E6%92%AD%E5%9B%BE2.jpg', '/course', 1, 0,
         '2019-11-13 18:05:32', '2019-11-18 10:28:22');
 insert into `crm_banner`
 values ('1194607458461216769', 'test2',
-        'https://guli-college-for-june.oss-cn-beijing.aliyuncs.com/banner/1525939573202.jpg', '/teacher', 2, 0,
+        'https://edu-site.oss-cn-beijing.aliyuncs.com/%E8%BD%AE%E6%92%AD%E5%9B%BE1.jpg', '/teacher', 2, 0,
         '2019-11-13 21:26:27', '2019-11-14 09:12:15');
