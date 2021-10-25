@@ -15,7 +15,6 @@
         <module>service-user</module>
         <module>service-edu</module>
         <module>service-oss</module>
-        <module>service-sms</module>
         <module>service-vod</module>
     </modules>
 
